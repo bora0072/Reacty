@@ -1,3 +1,8 @@
 .FrontPage .the-logo {
   max-width: 200px;
 }
+
+.form-control {
+  font-size: 1rem;
+  padding: 5px 5px;
+}
