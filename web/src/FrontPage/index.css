@@ -1,0 +1,108 @@
+
+ol, ul {
+  padding-left: 30px;
+}
+
+.board-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.status {
+  margin-bottom: 10px;
+}
+
+.card {
+  background-color: white;
+  -webkit-box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+          box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+  color: #4a4a4a;
+  max-width: 70%;
+  position: relative;
+  margin-left: 60px;
+  margin-top: 12px;
+  opacity: 0.9;
+}
+
+.square {
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 34px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 34px;
+}
+
+.square:focus {
+  outline: none;
+}
+
+.kbd-navigation .square:focus {
+  background: #ddd;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+}
+
+.game-info {
+  margin-left: 20px;
+}
+
+
+body {
+  padding-top: 15px;
+  background-color: #fcfcfc;
+}
+
+.callout {
+  margin: 0;
+}
+
+.close, .mark-done {
+  transition: opacity 0.3s linear,
+    color 0.3s linear;
+}
+
+.close:hover {
+  color: #DD0000;
+  cursor: pointer;
+}
+
+.mark-done {
+  opacity: 0.2;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.mark-done:hover {
+  opacity: 0.5;
+  color: #00DD00;
+}
+
+.callout-success {
+  text-decoration: line-through;
+  background-color: #fffacd;
+}
+
+.callout-info {
+  background-color: #ADEBAD;
+}
+
+
+.todo-form {
+  padding-top: 15px;
+  padding-bottom: 30px;
+}
+
+i {
+  font-style: normal !important;
+}
