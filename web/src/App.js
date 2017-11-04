@@ -8,6 +8,7 @@ import FrontPage from './FrontPage';
 import Header from './Header';
 import ProfilePage from './ProfilePage';
 
+
 class App extends Component {
 
   render() {
