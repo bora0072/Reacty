@@ -1,17 +1,19 @@
-import React, { Component } from 'react';
-//import React from 'react';
+//import React, { Component } from 'react';
+import React from 'react';
 import frustratedMonkey from './frustrated-monkey.gif';
 import './frontpage.css';
+import FullList from '../ReactKanban'
 import ReactDOM from 'react-dom';
 import './index.css';
 import 'bulma/css/bulma.css';
 import 'font-awesome/css/font-awesome.css';
+//import Annotate from './Annotate'
 
-const countStyle = {
-  color: 'brown',
-};
+import retext from 'retext';
+import keywords from 'retext-keywords';
+import nlcstToString from 'nlcst-to-string';
 
-class Frontpage extends Component {
+class Frontpage extends React.Component {
 
   constructor(props) {
     super(props);
@@ -32,6 +34,7 @@ class Frontpage extends Component {
 
          <div>
          <FilteredList />
+         <FullList/>
          </div>
 
     );
@@ -41,7 +44,7 @@ class Frontpage extends Component {
 //export default Frontpage;
 
 // FilteredList Component starts from here
-class FilteredList extends Component{
+class FilteredList extends React.Component{
   constructor(){
     super();
     this.state = {
@@ -95,7 +98,7 @@ class FilteredList extends Component{
 
 
 
-class List extends Component{
+class List extends React.Component{
   render(){
     return (
       <ul className="list-group">
@@ -238,6 +241,8 @@ class ToDolist extends React.Component {
 class Container extends React.Component{
   constructor(props){
     super(props);
+
+
     this.state = {
       todos: [
         {
@@ -304,6 +309,8 @@ class Container extends React.Component{
     }
   }
 
+
+
   deleteCard = (index, type) => {
    if(type =='todos'){
      this.state.todos.splice(index,1);
@@ -343,12 +350,17 @@ class Container extends React.Component{
   render() {
     var todos = this.state.todos.map(function(todo, index) {
        return (
-         <div><Card
+         <div>
+
+         <Card
          key={index}
          name={todo.taskName}
          todos={todo.todos}
          onClickDelete={this.deleteCard.bind(this, index, 'todos')}
-         onClickMove={this.moveCard.bind(this, index, 'todos')}/><br/></div>
+         onClickMove={this.moveCard.bind(this, index, 'todos')}/><br/>
+
+         <h6>{annotate("This is me. submit the project for artificial intelligence tomorrow")}</h6>
+         </div>
        );
      }.bind(this));
     var inProgress = this.state.inProgress.map(function(todo, index) {
@@ -396,5 +408,40 @@ class Container extends React.Component{
 
 
 
-
 export default Container;
+
+
+/*var obj=`Please submit an updated project proposal (~2 pages in length) with the following information:
+Title of your project
+Names of team members
+Abstract
+Detailed plan of work, including timeline
+Summary/overview of previous/related work in the topic area`*/
+
+//find keywords and keyphrases
+const annotate=function(obj){
+  var data=[];
+retext()
+    .use(keywords)
+    .process(obj, function (err, file) {
+      if (err) throw err;
+
+      //Keywords
+      file.data.keywords.forEach(function (keyword) {
+        var obj=nlcstToString(keyword.matches[0].node);
+        data.push(obj +"  , ");
+      });
+
+      //keyphrases
+      file.data.keyphrases.forEach(function (phrase) {
+        var obj=phrase.matches[0].nodes.map(nlcstToString).join('');
+        data.push(obj+" ,  ");
+      });
+
+      //console.log(data);
+    }
+  );
+return data;
+}
+
+ReactDOM.render(<Container/>, document.getElementById('root'));

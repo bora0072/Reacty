@@ -47,6 +47,7 @@ router.get('/protected', checkJwt, function(req, res, next) {
 
 });
 
+<<<<<<< HEAD
 
 
 router.get('/allcards',checkJwt,function(req,res,next){
@@ -61,4 +62,21 @@ router.get('/allcards',checkJwt,function(req,res,next){
   });
 
 });
+=======
+var cards = require('../data/cards.json')
+/*GET all movies as JSON */
+router.get('/cards', function(req, res, next) {
+  res.send(cards);
+});
+
+router.get('/example', function(req, res, next) {
+  var foo = {
+    message: 'hello from express!'
+  }
+  console.log();
+  res.send(foo);
+});
+
+
+>>>>>>> ad2c4f079ecd29b8ba9decf6d05298651d113bda
 module.exports = router;

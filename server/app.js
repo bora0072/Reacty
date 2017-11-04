@@ -11,7 +11,6 @@ const expressMongoDb = require('express-mongo-db');
 
 const auth = require('./auth');
 const dbApi = require('./routes/db-api');
-
 const app = express();
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -21,7 +20,6 @@ app.use(cookieParser());
 app.use(expressMongoDb(process.env.DB_URI));
 
 app.use('/api/db', dbApi);
-
 // react routing (production)
 var reactBase = path.resolve(__dirname, '../web/build')
 if (!fs.existsSync(reactBase)) {
@@ -45,6 +43,8 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
+
 
 // error handler
 app.use(function(err, req, res, next) {
