@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-//import React from 'react';
+//import React, { Component } from 'react';
+import React from 'react';
 import frustratedMonkey from './frustrated-monkey.gif';
 import './frontpage.css';
 import ReactDOM from 'react-dom';
@@ -11,7 +11,7 @@ const countStyle = {
   color: 'brown',
 };
 
-class Frontpage extends Component {
+class Frontpage extends React.Component {
 
   constructor(props) {
     super(props);
@@ -41,7 +41,7 @@ class Frontpage extends Component {
 //export default Frontpage;
 
 // FilteredList Component starts from here
-class FilteredList extends Component{
+class FilteredList extends React.Component{
   constructor(){
     super();
     this.state = {
@@ -95,7 +95,7 @@ class FilteredList extends Component{
 
 
 
-class List extends Component{
+class List extends React.Component{
   render(){
     return (
       <ul className="list-group">
@@ -396,5 +396,5 @@ class Container extends React.Component{
 
 
 
-
 export default Container;
+ReactDOM.render(<Container/>, document.getElementById('root'));
