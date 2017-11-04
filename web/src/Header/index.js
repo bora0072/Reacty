@@ -6,13 +6,13 @@ class Header extends Component {
 
   render() {
     return (
-      <nav className="navbar is-success" aria-label="main navigation">
+      <nav className="navbar is-dark" aria-label="main navigation">
         <div className="navbar-brand">
           <a class="navbar-item title" href="/">Reacty  </a>
         </div>
 
         <div className="navbar-item">
-          <a class="navbar-item" href="/profile">
+          <a class="navbar-item" href="/">
             item1
           </a>
         </div>
@@ -28,25 +28,6 @@ class Header extends Component {
             item3
           </a>
         </div>
-
-
-        <div className="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-              item4
-          </a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item">
-              Overview
-            </a>
-            <a class="navbar-item">
-              Elements
-            </a>
-            <a class="navbar-item">
-              Components
-            </a>
-          </div>
-          </div>
-
 
 
         <div className="navbar-menu">
