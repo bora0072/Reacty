@@ -410,7 +410,7 @@ class Container extends React.Component{
 
 export default Container;
 
-ReactDOM.render(<Container/>, document.getElementById('root'));
+
 /*var obj=`Please submit an updated project proposal (~2 pages in length) with the following information:
 Title of your project
 Names of team members
@@ -443,3 +443,5 @@ retext()
   );
 return data;
 }
+
+ReactDOM.render(<Container/>, document.getElementById('root'));
