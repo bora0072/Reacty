@@ -1,16 +1,17 @@
 {
-  "name": "web",
-  "version": "0.1.0",
+  "name": "react-kanban",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "auth0-js": "^8.10.1",
+    "array-range": "~1.0.1",
     "bulma": "^0.6.0",
     "font-awesome": "^4.7.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.14",
-    "retext-keywords": "^4.0.1"
+    "font-awesome.css": "^4.7.2",
+    "react": "~15.6.1",
+    "react-dom": "~15.6.1",
+    "react-github-badge": "~0.4.0",
+    "react-motion": "~0.5.0",
+    "react-router-dom": "^4.2.2"
   },
   "proxy": "http://localhost:3001/",
   "scripts": {
@@ -19,25 +20,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-
-  "name": "react-kanban",
-  "version": "0.0.1",
-  "private": true,
   "devDependencies": {
     "react-scripts": "1.0.7"
-  },
-  "dependencies": {
-    "array-range": "~1.0.1",
-    "react": "~15.6.1",
-    "react-dom": "~15.6.1",
-    "react-github-badge": "~0.4.0",
-    "react-motion": "~0.5.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
   },
   "now": {
     "alias": "react-kanban.now.sh"
