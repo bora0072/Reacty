@@ -34,8 +34,6 @@ class App extends Component {
           </div>
         </section>
 
-        <Footer />
-
       </div>
     );
   }
