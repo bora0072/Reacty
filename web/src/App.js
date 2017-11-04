@@ -9,6 +9,7 @@ import Header from './Header';
 import ProfilePage from './ProfilePage';
 import Board from './Board';
 
+
 class App extends Component {
 
   render() {
@@ -18,8 +19,10 @@ class App extends Component {
 
     return (
       <div className="App">
+        <div>
+          <Header {...this.props} />
+        </div>
 
-        <Header {...this.props} />
 
         <section className="section">
           <div className="content">

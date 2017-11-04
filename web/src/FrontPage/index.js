@@ -2,14 +2,14 @@
 import React from 'react';
 import frustratedMonkey from './frustrated-monkey.gif';
 import './frontpage.css';
+import FullList from '../ReactKanban'
 import ReactDOM from 'react-dom';
 import './index.css';
 import 'bulma/css/bulma.css';
 import 'font-awesome/css/font-awesome.css';
+import Annotate from './Annotate'
 
-const countStyle = {
-  color: 'brown',
-};
+
 
 class Frontpage extends React.Component {
 
@@ -32,6 +32,8 @@ class Frontpage extends React.Component {
 
          <div>
          <FilteredList />
+         <Annotate />
+         <FullList/>
          </div>
 
     );
