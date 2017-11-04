@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './frontpage.css';
 import FilteredList from './FilteredList'
-
+import FullList from '../ReactKanban'
 
 class Frontpage extends Component {
   render() {
@@ -10,6 +10,7 @@ class Frontpage extends Component {
 
          <div className="searchbar">
          <FilteredList />
+         <FullList/>
          </div>
 
     );

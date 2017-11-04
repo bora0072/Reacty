@@ -6,15 +6,15 @@ import './list.css'
 
 class FullList extends Component {
   state = {
-    array1: [1, 2, 3, 4, 5],
+    array1: ["1ss", "2", "3", "4", "5"],
     array2: [6, 7, 8, 9, 10],
     array3: [11, 12, 13, 14, 15]
   }
   render () {
-    const { array3, array2, array1 } = this.state
+    const { array3, array2, array1 } = this.state;
 
     return (
-      <div className="App">
+      <div >
         <List
           items={[array1, array2, array3]}
         />

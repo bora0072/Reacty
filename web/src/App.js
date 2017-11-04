@@ -18,8 +18,10 @@ class App extends Component {
 
     return (
       <div className="App">
+        <div>
+          <Header {...this.props} />
+        </div>
 
-        <Header {...this.props} />
 
         <section className="section">
           <div className="content">
