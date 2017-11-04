@@ -1,5 +1,8 @@
 # heroku local config
 /.env
+package.json
+package-lock.json
+.gitignore
 
 # Logs
 logs
