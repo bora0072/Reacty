@@ -6,18 +6,53 @@ class Header extends Component {
 
   render() {
     return (
-      <nav className="navbar is-dark" aria-label="main navigation">
-        <div className="navbar-brand"><a class="navbar-item title" href="/">Reacty </a>
+      <nav className="navbar is-success" aria-label="main navigation">
+        <div className="navbar-brand">
+          <a class="navbar-item title" href="/">Reacty  </a>
         </div>
 
-        <div className="navbar-menu">
-          <div className="navbar-start">
-            <a className="navbar-item"></a>
+        <div className="navbar-item">
+          <a class="navbar-item" href="/profile">
+            item1
+          </a>
+        </div>
+
+        <div className="navbar-item">
+          <a class="navbar-item" href="/profile">
+            item2
+          </a>
+        </div>
+
+        <div className="navbar-item">
+          <a class="navbar-item" href="/profile">
+            item3
+          </a>
+        </div>
+
+
+        <div className="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+              item4
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item">
+              Overview
+            </a>
+            <a class="navbar-item">
+              Elements
+            </a>
+            <a class="navbar-item">
+              Components
+            </a>
+          </div>
           </div>
 
+
+
+        <div className="navbar-menu">
           <LoginLogout {...this.props} />
         </div>
-      </nav>
+    </nav>
     )
   }
 
