@@ -47,4 +47,19 @@ router.get('/protected', checkJwt, function(req, res, next) {
 
 });
 
+var cards = require('../data/cards.json')
+/*GET all movies as JSON */
+router.get('/cards', function(req, res, next) {
+  res.send(cards);
+});
+
+router.get('/example', function(req, res, next) {
+  var foo = {
+    message: 'hello from express!'
+  }
+  console.log();
+  res.send(foo);
+});
+
+
 module.exports = router;
