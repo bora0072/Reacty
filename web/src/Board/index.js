@@ -13,9 +13,21 @@ class Board extends React.Component {
       cards: []
     }
   }
+
+  componentDidMount() {
+    fetch('/api/db/cards')
+      .then(res => res.json())
+      .then(json => {
+        this.setState({cards: json});
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   render(){
     return(
-      <KanbanBoard cards={cards} />
+      <KanbanBoard cards={this.state.cards} />
     );
   }
 }
