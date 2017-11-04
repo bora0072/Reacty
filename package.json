@@ -13,8 +13,10 @@
     "node": "8.5.x"
   },
   "dependencies": {
+    "array-range": "^1.0.1",
     "auth0-js": "^8.10.1",
     "body-parser": "~1.17.1",
+    "bulma": "^0.6.0",
     "co": "^4.6.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
