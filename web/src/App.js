@@ -7,7 +7,6 @@ import Footer from './Footer';
 import FrontPage from './FrontPage';
 import Header from './Header';
 import ProfilePage from './ProfilePage';
-import FullList from './ReactKanban';
 
 class App extends Component {
 
@@ -25,6 +24,7 @@ class App extends Component {
           <div className="content">
 
             <Route exact path="/" component={FrontPage}/>
+
             {/* send in props for router stuff; send in this.props for auth stuff */}
             <Route path="/api-demo" render={props => <ApiDemoPage {...props} {...this.props} />} />
 
@@ -33,7 +33,6 @@ class App extends Component {
           </div>
         </section>
 
-        <FullList />
         <Footer />
 
       </div>
