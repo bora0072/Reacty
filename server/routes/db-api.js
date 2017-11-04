@@ -47,4 +47,18 @@ router.get('/protected', checkJwt, function(req, res, next) {
 
 });
 
+
+
+router.get('/allcards',checkJwt,function(req,res,next){
+  req.db.collection('TaskCollection').find().toArray(function(err,results){
+    if(err){
+      next(err);
+    }
+    res.json({
+      cards:results
+    });
+      console.log(results);
+  });
+
+});
 module.exports = router;
