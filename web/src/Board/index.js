@@ -132,6 +132,35 @@ class Board extends React.Component {
     }
   }
 
+  persistCardDrag (cardId, status) {
+    // Find the index of the card
+    let cardIndex = this.state.cards.findIndex((card)=>card.id == cardId);
+    // Geting current card
+    let card = this.state.cards[cardIndex]
+    fetch(`api/db/cards/${cardId}`, {
+      method: 'put',
+      body: JSON.stringify({status: card.status, row_order_position: cardIndex})
+    })
+    .then((response) => {
+      if(!response.ok){
+        // Throw an error if server response wasn't 'ok'
+        throw new Error("Server response wasn't OK")
+      }
+    })
+    .catch((error) => {
+      console.error("Fetch error:",error);
+      this.setState(
+        update(this.state, {
+          cards: {
+            [cardIndex]: {
+              status: { $set: status }
+            }
+          }
+        })
+      );
+    });
+  }
+
   render(){
 
       let landingPage = <div>Please login to use KanbanBoard</div>;
@@ -145,7 +174,9 @@ class Board extends React.Component {
               add: this.addTask.bind(this) }}
             cardCallbacks={{
               updateStatus: this.updateCardStatus,
-              updatePosition: this.updateCardPosition}}
+              updatePosition: this.updateCardPosition,
+              persistCardDrag: this.persistCardDrag.bind(this)
+            }}
             />
           );
       }
