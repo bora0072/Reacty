@@ -13,22 +13,17 @@ class Header extends Component {
         </div>
 
         <div className="navbar-item ">
-          <a class="navbar-item" href="/">
-            item1
+          <a class="navbar-item" href="/Board">
+          Kanban Board
           </a>
         </div>
 
         <div className="navbar-item">
           <a class="navbar-item" href="/profile">
-            item2
+          Progress Tracker
           </a>
         </div>
 
-        <div className="navbar-item">
-          <a class="navbar-item" href="/profile">
-            item3
-          </a>
-        </div>
 
 
         <div className="navbar-menu">

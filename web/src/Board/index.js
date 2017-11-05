@@ -48,13 +48,25 @@ class Board extends React.Component {
   }
 
   render(){
-    return(
-      <KanbanBoard cards={this.state.cards}
-      taskCallbacks={{
+
+      let landingPage = <div>Please login to use KanbanBoard</div>;
+      if (this.props.profile) {
+        landingPage = (
+          <KanbanBoard cards={this.state.cards}
+            taskCallbacks={{
             toggle: this.toggleTask.bind(this),
             delete: this.deleteTask.bind(this),
             add: this.addTask.bind(this) }}/>
-    );
+
+          );
+      }
+
+      return(
+        <div className="KBoard">
+                  {landingPage}
+        </div>
+
+      );
   }
 }
 

@@ -25,7 +25,7 @@ class App extends Component {
           <div className="content">
 
             {/*<Route exact path="/" component={FrontPage}/>*/}
-            <Route exact path="/Board" render={props => <Board {...props} {...this.props} />} />
+            <Route exact path="/" render={props => <Board {...props} {...this.props} />} />
           </div>
         </section>
 
