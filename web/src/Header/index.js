@@ -6,7 +6,7 @@ class Header extends Component {
 
   render() {
     return (
-      <nav className="navbar is-light" aria-label="main navigation">
+      <nav className="navbar is-dark" aria-label="main navigation">
         <div className="navbar-brand">
           <a class="navbar-item title" href="/">Reacty  </a>
         </div>
