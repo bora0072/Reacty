@@ -39,7 +39,7 @@ class Board extends React.Component {
                     });
     this.setState({cards: nextState});
 
-    fetch('/api/db/cards/${cardId}/tasks/${taskId}',{
+    fetch(`/api/db/cards/${cardId}/tasks/${taskId}`,{
       method: 'delete'
     });
 
