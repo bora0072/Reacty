@@ -38,11 +38,10 @@ class Board extends React.Component {
                     [cardIndex]: { tasks: {$splice: [[taskIndex, 1]]}}
                     });
     this.setState({cards: nextState});
-
-    fetch('/api/db/cards/${cardId}/tasks/${taskId}',{
+    fetch(`/api/db/cards/${cardId}/tasks/${taskId}`,{
       method: 'delete'
     });
-    
+
   }
 
 
