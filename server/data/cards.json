@@ -7,7 +7,7 @@
 		"tasks": []
 	},
 	{
-		"id": 1,
+		"id": 2,
 		"title": "Start Coding",
 		"description": "I should **start writing** a block in ReactJS",
 		"color": "#3A7E28",
@@ -15,7 +15,7 @@
 		"tasks": []
 	},
 	{
-		"id": 2,
+		"id": 3,
 		"title": "Write some code",
 		"description": "Code along with the samples in the book",
 		"status": "todo",

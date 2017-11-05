@@ -27,7 +27,30 @@ class Board extends React.Component {
   }
 
   addTask(cardId, taskName){
+    let cardIndex = this.state.cards.findIndex((card) => card.id == cardId);
 
+    //new task create with given name and temp Id
+    let newTask = { id: Date.now(), name: taskName, done: false};
+    //creating new object and pushing the new task to the array of tasks
+    let nextState = update(this.state.cards, {
+                    [cardIndex]:{
+                      tasks: {$push: [newTask]}
+                    }
+                  });
+    //set the component state to the mutated(changed) object
+    this.setState({cards: nextState});
+
+    //lastly call the api to add the task on the server
+    fetch(`api/db/cards/${cardId}/tasks`,{
+      method: 'post',
+      body: JSON.stringify(newTask)
+    })
+    .then((response) => response.json())
+    .then((responseData) => {
+      //When the server returns with an ID, update it on the ReactJS
+      newTask.id = responseData.id
+      this.setState({cards: nextState});
+    });
   }
 
   deleteTask(cardId, taskId, taskIndex){
