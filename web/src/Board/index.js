@@ -47,7 +47,29 @@ class Board extends React.Component {
 
 
   toggleTask(cardId, taskId, taskIndex){
+    let cardIndex = this.state.cards.findIndex((card) => card.id == cardId);
+    //Save ref to tasks's 'done' value
+    let newDoneValue;
+    // $apply to change done value to opposite
+    let nextState = update(this.state.cards, {
+                          [cardIndex]: {
+                            tasks: {
+                              [taskIndex]: {
+                                done: {$apply: (done)=>{
+                                    newDoneValue = !done
+                                    return newDoneValue;
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        });
+        this.setState({cards: nextState});
 
+        fetch(`api/db/cards/${cardId}/tasks/${taskId}`, {
+          method: 'put',
+          body: JSON.stringify({done: newDoneValue})
+        });
   }
 
   render(){
