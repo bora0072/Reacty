@@ -47,6 +47,20 @@ router.get('/protected', checkJwt, function(req, res, next) {
 
 });
 
+
+
+router.get('/allcards',checkJwt,function(req,res,next){
+  req.db.collection('TaskCollection').find().toArray(function(err,results){
+    if(err){
+      next(err);
+    }
+    res.json({
+      cards:results
+    });
+      console.log(results);
+  });
+
+});
 var cards = require('../data/cards.json')
 /*GET all movies as JSON */
 router.get('/cards', function(req, res, next) {

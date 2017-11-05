@@ -3,6 +3,13 @@ ol, ul {
   padding-left: 30px;
 }
 
+
+.form-control {
+  font-size: 1rem;
+  padding: 5px 5px;
+}
+
+
 .board-row:after {
   clear: both;
   content: "";

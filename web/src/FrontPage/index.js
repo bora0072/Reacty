@@ -1,13 +1,8 @@
-//import React, { Component } from 'react';
 import React from 'react';
-import frustratedMonkey from './frustrated-monkey.gif';
-import './frontpage.css';
-import FullList from '../ReactKanban'
 import ReactDOM from 'react-dom';
 import './index.css';
 import 'bulma/css/bulma.css';
 import 'font-awesome/css/font-awesome.css';
-//import Annotate from './Annotate'
 
 import retext from 'retext';
 import keywords from 'retext-keywords';
@@ -15,33 +10,17 @@ import nlcstToString from 'nlcst-to-string';
 
 class Frontpage extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      clickCount: 0
-    }
-    this.foo = this.foo.bind(this);
-  }
-
-  foo() {
-    this.setState(prevState => {
-      return {clickCount: prevState.clickCount + 1}
-    })
-  }
-
   render() {
     return (
 
          <div>
          <FilteredList />
-         <FullList/>
          </div>
 
     );
   }
 }
 
-//export default Frontpage;
 
 // FilteredList Component starts from here
 class FilteredList extends React.Component{
@@ -247,7 +226,7 @@ class Container extends React.Component{
       todos: [
         {
           taskName : 'The Awesome task',
-          todos: [,
+          todos: [
             { value: 'Be Awesome', done: false},
             { value: 'I am done being awesome', done: false},
             { value: 'Start hacker ranking', done: false}
@@ -255,7 +234,7 @@ class Container extends React.Component{
         },
         {
           taskName : 'The bad task',
-          todos: [,
+          todos: [
             { value: 'Be Awe', done: false},
             { value: 'I am done being awestruck', done: false},
             { value: 'Hacker rankered', done: false}
@@ -263,7 +242,7 @@ class Container extends React.Component{
         },
         {
           taskName : 'The Dreamer task',
-          todos: [,
+          todos: [
             { value: 'Dream Worker', done: false},
             { value: 'Leave your Dreams', done: false},
             { value: 'London Dreams', done: false}
@@ -273,7 +252,7 @@ class Container extends React.Component{
       inProgress: [
         {
           taskName : 'Progress 1 task',
-          todos: [,
+          todos: [
             { value: 'Awesome Progress', done: false},
             { value: 'Are we progressing', done: false},
             { value: 'Yew we are', done: false}
@@ -281,7 +260,7 @@ class Container extends React.Component{
         },
         {
           taskName : 'Progress 2 task',
-          todos: [,
+          todos: [
             { value: 'Be Awe', done: false},
             { value: 'Pro Progress', done: false},
             { value: 'Love Progres', done: false}
@@ -291,7 +270,7 @@ class Container extends React.Component{
       completed: [
         {
           taskName : 'Completed task1',
-          todos: [,
+          todos: [
             { value: 'Be Awe', done: true},
             { value: 'Pro Progress', done: true},
             { value: 'Love Progres', done: true}
@@ -299,7 +278,7 @@ class Container extends React.Component{
         },
         {
           taskName : 'CompletedTask2',
-          todos: [,
+          todos: [
             { value: 'Be Awe', done: true},
             { value: 'Pro Progress', done: true},
             { value: 'Love Progres', done: true}
@@ -406,22 +385,10 @@ class Container extends React.Component{
   }
 }
 
-
-
-export default Container;
-
-
-/*var obj=`Please submit an updated project proposal (~2 pages in length) with the following information:
-Title of your project
-Names of team members
-Abstract
-Detailed plan of work, including timeline
-Summary/overview of previous/related work in the topic area`*/
-
 //find keywords and keyphrases
 const annotate=function(obj){
   var data=[];
-retext()
+  retext()
     .use(keywords)
     .process(obj, function (err, file) {
       if (err) throw err;
@@ -441,7 +408,8 @@ retext()
       //console.log(data);
     }
   );
-return data;
+ return data;
 }
 
+export default Frontpage;
 ReactDOM.render(<Container/>, document.getElementById('root'));

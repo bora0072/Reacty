@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 
 import LoginLogout from './LoginLogout';
+import './index.css';
 
 class Header extends Component {
 
   render() {
     return (
-      <nav className="navbar is-light" aria-label="main navigation">
+      <nav className="navbar is-dark" aria-label="main navigation">
         <div className="navbar-brand">
           <a class="navbar-item title" href="/">Reacty  </a>
         </div>
 
-        <div className="navbar-item">
+        <div className="navbar-item ">
           <a class="navbar-item" href="/">
             item1
           </a>

@@ -3,18 +3,18 @@ import React, { Component } from 'react';
 /**
  * Demo of a fully authenticated API call.
  */
-class ProtectedCall extends Component {
+class AllCards extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: [],
+      cards: [],
       error: false,
       loading: true
     };
   }
 
   componentDidMount() {
-    let myRequest = new Request('/api/db/protected', {
+    let myRequest = new Request('/api/db/allcards', {
       method: 'GET',
       // this header sends the user token from auth0
       headers: this.props.getAuthorizationHeader()
@@ -29,10 +29,10 @@ class ProtectedCall extends Component {
         }
         return response;
       })
-      .then(res => res.json())
+      .then(res => res.json();console.log(JSON.stringify(res.json()));)
       .then(json => {
         this.setState({
-          'todos': json.todos,
+          'cards': json.cards,
           'loading': false
         });
       })
@@ -42,25 +42,25 @@ class ProtectedCall extends Component {
   }
 
   render() {
-    let todoList = this.state.todos.map(function(todo) {
-      return <li key={todo._id}>{todo.task}</li>;
-    });
-
-    if (this.state.loading) {
-      return <h1>loading...</h1>
-    } else if (this.state.error) {
-      return <h1>todos from a protected db call (401 unauthorized)</h1>
-    } else {
-      return (
-        <div className="Db">
-          <h1>todos from a protected db call</h1>
-          <ul>
-            {todoList}
-          </ul>
-        </div>
-      );
-    }
-
+  /*  // let cardsList = this.state.cards.map(function(todo) {
+    //   return <li key={todo._id}>{todo.task}</li>;
+    // });
+    //
+    // if (this.state.loading) {
+    //   return <h1>loading...</h1>
+    // } else if (this.state.error) {
+    //   return <h1>todos from a protected db call (401 unauthorized)</h1>
+    // } else {
+    //   return (
+    //     <div className="Db">
+    //       <h1>todos from a protected db call</h1>
+    //       <ul>
+    //         {todoList}
+    //       </ul>
+    //     </div>
+    //   );
+    //}
+   //Your rendering logic goes here.*/
   }
 }
 
