@@ -183,10 +183,9 @@ class Board extends React.Component {
 
       return(
         <div className="KBoard">
-                  {landingPage}
+            {landingPage}
         </div>
-
-      );
+      )
   }
 }
 
