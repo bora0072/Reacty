@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import update from 'react-addons-update';
 import './index.css';
+import {throttle} from './util';
 
 import KanbanBoard from './kanbanBoard';
 
@@ -13,6 +14,8 @@ class Board extends React.Component {
     this.state = {
       cards: []
     }
+    this.updateCardStatus = throttle(this.updateCardStatus.bind(this));
+    this.updateCardPosition = throttle(this.updateCardPosition.bind(this),500);
   }
 
   componentDidMount() {
@@ -141,8 +144,8 @@ class Board extends React.Component {
               delete: this.deleteTask.bind(this),
               add: this.addTask.bind(this) }}
             cardCallbacks={{
-              updateStatus: this.updateCardStatus.bind(this),
-              updatePosition: this.updateCardPosition.bind(this)}}
+              updateStatus: this.updateCardStatus,
+              updatePosition: this.updateCardPosition}}
             />
           );
       }
