@@ -1,0 +1,7 @@
+.navbar-item :hover{
+    background-color:grey !important;
+}
+
+.navbar-item{
+  color:white !important;
+}
