@@ -1,6 +1,9 @@
 import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import {withRouter} from "react-router-dom";
+import retext from 'retext';
+import keywords from 'retext-keywords';
+import nlcstToString from 'nlcst-to-string';
 
 class NewCard extends Component{
 
@@ -41,12 +44,15 @@ class NewCard extends Component{
     var userHeader = new Headers();
     userHeader.append("username", this.props.profile.name);
     userHeader.append("content-type", 'application/json');
+    var keyword=annotate(""+this.state.title+" "+this.state.description);
+    console.log(keyword);
     let newTask = {
       id: this.state.id,
       title: this.state.title,
       description: this.state.description,
       status:this.state.status,
       color:this.state.color,
+      keyword: keyword,
       tasks:[]
     }
     fetch(`api/db/cards`,{
@@ -110,4 +116,29 @@ class NewCard extends Component{
     cardCallbacks: PropTypes.object,
   };
 
+  const annotate=function(obj){
+    var data=[];
+    console.log("inside annotate");
+    retext()
+      .use(keywords)
+      .process(obj, function (err, file) {
+        if (err) throw err;
+
+        //Keywords
+        file.data.keywords.forEach(function (keyword) {
+          var obj=nlcstToString(keyword.matches[0].node);
+          data.push(obj);
+        });
+
+        //keyphrases
+        file.data.keyphrases.forEach(function (phrase) {
+          var obj=phrase.matches[0].nodes.map(nlcstToString).join('');
+          data.push(obj);
+        });
+
+        //console.log(data);
+      }
+    );
+   return data;
+  }
 export default NewCard;
