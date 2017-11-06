@@ -152,12 +152,16 @@ class Board extends React.Component {
   }
 
   persistCardDrag (cardId, status) {
+    var userHeader = new Headers();
+    userHeader.append("username", this.props.profile.name);    //lastly call the api to add the task on the server
+    userHeader.append('content-type', 'application/json');
     // Find the index of the card
     let cardIndex = this.state.cards.findIndex((card)=>card.id == cardId);
     // Geting current card
     let card = this.state.cards[cardIndex]
     fetch(`api/db/cards/${cardId}`, {
       method: 'put',
+      headers : userHeader,
       body: JSON.stringify({status: card.status, row_order_position: cardIndex})
     })
     .then((response) => {

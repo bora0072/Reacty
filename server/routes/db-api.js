@@ -115,7 +115,7 @@ router.delete('/cards/:cardId/tasks/:taskId', function(req, res, next){
       });
 });
 
-//Editing a flashCard
+//Editing a task
 router.put('/cards/:cardId/tasks/:taskId', function(req, res, next){
   //extract all notes for give particular notebook
   //Query to get all notes for a particular user
@@ -138,6 +138,17 @@ router.put('/cards/:cardId/tasks/:taskId', function(req, res, next){
               res.send({ error: err, affected: documents });
           });
   });
+});
+
+//changing the status of cards
+router.put('/cards/:cardId', function(req, res, next){
+  req.db.collection('TaskCollection').updateOne({ "name": req.headers['username'], "cards.id": parseInt(req.params.cardId)},
+      {
+        "$set":
+          {"cards.$.status": req.body.status}
+      }, function (err, documents) {
+        res.send({ error: err, affected: documents });
+    });
 });
 
 router.get('/example', function(req, res, next) {
