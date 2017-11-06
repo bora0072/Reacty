@@ -91,6 +91,12 @@ router.post('/cards/:cardId/tasks',function(req,res,next){
         });
 
   });
+/*Add a card */
+router.post('/cards', function(req, res, next){
+  req.db.collection('TaskCollection').updateOne({"name": req.headers['username']}, {$push:{ "cards": req.body }}, function (err, documents) {
+        res.send({ error: err, affected: documents });
+    });
+});
 
 router.get('/example', function(req, res, next) {
   var foo = {
