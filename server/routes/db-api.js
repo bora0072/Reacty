@@ -68,7 +68,7 @@ router.get('/createuserIfAbsent',function(req,res,next){
 
 /*GET all cards as JSON */
 router.get('/cards', function(req, res, next) {
-  console.log(req.headers['username']);
+  //console.log(req.headers['username']);
   //console.log('auth0 user id:', req.user.sub);
 
   req.db.collection('TaskCollection').find({"name": req.headers['username']}).toArray(function(err,results){
@@ -76,42 +76,20 @@ router.get('/cards', function(req, res, next) {
       next(err);
     }
     res.send(results[0].cards);
-    console.log("These are cards for user  " + JSON.stringify(results[0].cards));
+    //console.log("These are cards for user  " + JSON.stringify(results[0].cards));
   });
 });
 
-/*Create a Task for a cardId
-fetch(`api/db/cards/${cardId}/tasks`,{
-  method: 'post',
-  body: JSON.stringify(newTask)
-})*/
-
-// router.post('/user/notebook/flashcards', function(req, res, next){
-//   console.log(req.notebook);
-//   req.db.collection('usernotecollection').updateOne({ "name": req.user.displayName, "notebooks.notebookname": notebook},
-//       { "$push":
-//           {"notebooks.$.flashcards": req.body}
-//       }, function (err, documents) {
-//         res.send({ error: err, affected: documents });
-//     });
-// });
-
+/*Create a Task for a cardId*/
 router.post('/cards/:cardId/tasks',function(req,res,next){
-  console.log(req.params.cardId);
-  //createNewTaskSequence(req,req.params.cardId);
-  var newTaskID = getNextSequence(req,req.params.cardId);
-  console.log(req.body);
-  console.log(newTaskID);
-  req.body['id']= newTaskID;
-  req.db.collection('TaskCollection').find({"name":req.headers['username'], "cards.id":req.params.cardId}),
+  req.db.collection('TaskCollection').updateOne({"name":req.headers['username'], "cards.id":parseInt(req.params.cardId)},
         {"$push":
               {"cards.$.tasks":req.body}
 
         },function(err,documents){
-          res.send({newTaskID});
-        }
+          res.send({ error: err, affected: documents });
+        });
 
-  console.log("Req body again" + JSON.stringify(req.body));
   });
 
 router.get('/example', function(req, res, next) {
@@ -123,26 +101,26 @@ router.get('/example', function(req, res, next) {
 });
 
 
-function createNewTaskSequence(req,cardId){
-  var ret = req.db.collection('counters').insert(
-     {
-        id: cardId,
-        seq: 0,
-     }
-  );
-}
+// function createNewTaskSequence(req,cardId){
+//   var ret = req.db.collection('counters').insert(
+//      {
+//         id: cardId,
+//         seq: 0,
+//      }
+//   );
+// }
 
-function getNextSequence(req,cardId) {
-
-   var ret = req.db.collection('counters').findAndModify(
-          {
-            query: { id: 3 },
-            update: { $inc: { seq: 1 } },
-            new: true
-          }
-   );
-   console.log(ret,ret.seq);
-   return ret.seq;
-}
+// function getNextSequence(req,cardId) {
+//
+//    var ret = req.db.collection('counters').findAndModify(
+//           {
+//             query: { id: 3 },
+//             update: { $inc: { seq: 1 } },
+//             new: true
+//           }
+//    );
+//    console.log(ret,ret.seq);
+//    return ret.seq;
+// }
 
 module.exports = router;

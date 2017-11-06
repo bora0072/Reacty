@@ -53,10 +53,12 @@ class Board extends React.Component {
     //set the component state to the mutated(changed) object
     this.setState({cards: nextState});
 
-    //lastly call the api to add the task on the server
+    var userHeader = new Headers();
+    userHeader.append("username", this.props.profile.name);    //lastly call the api to add the task on the server
+    userHeader.append('content-type', 'application/json');
     fetch(`api/db/cards/${cardId}/tasks`,{
       method: 'post',
-      headers:{'content-type': 'application/json'},
+      headers:userHeader,
       body: JSON.stringify(newTask)
     })
     .then((response) => response.json())
