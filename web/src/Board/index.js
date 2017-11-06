@@ -58,11 +58,11 @@ class Board extends React.Component {
       method: 'post',
       body: JSON.stringify(newTask)
     })
-    .then((response) => response.json())
     .then((responseData) => {
+      //TODO: Implement Rollback
       //When the server returns with an ID, update it on the ReactJS
-      newTask.id = responseData.id
-      this.setState({cards: nextState});
+      // newTask.id = responseData.id
+      // this.setState({cards: nextState});
     });
   }
 
