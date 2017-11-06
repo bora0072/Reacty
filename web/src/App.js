@@ -5,6 +5,7 @@ import { withAuth } from './Auth';
 
 import Header from './Header';
 import Board from './Board';
+import NewCard from './Board/NewCard';
 
 
 
@@ -23,7 +24,7 @@ class App extends Component {
         <section className="section">
           <div className="content">
             <Route exact path="/" render={props => <Board {...props} {...this.props} />} />
-            <Route exact path="/new"  render={props => <NewCard {...props} {...this.props} />
+            <Route exact path="/new"  render={props => <NewCard {...props} {...this.props} />} />
           </div>
         </section>
       </div>

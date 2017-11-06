@@ -80,8 +80,6 @@ router.get('/cards', function(req, res, next) {
   });
 });
 
-<<<<<<< HEAD
-=======
 /*Create a Task for a cardId*/
 router.post('/cards/:cardId/tasks',function(req,res,next){
   req.db.collection('TaskCollection').updateOne({"name":req.headers['username'], "cards.id":parseInt(req.params.cardId)},
@@ -100,7 +98,6 @@ router.post('/cards', function(req, res, next){
     });
 });
 
->>>>>>> db91e36fd43805f6ff20e7a7f8d4c8808a7dd908
 router.get('/example', function(req, res, next) {
   var foo = {
     message: 'hello from express!'
