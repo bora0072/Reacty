@@ -28,7 +28,8 @@ class List extends Component {
               title={card.title}
               description={card.description}
               tasks={card.tasks}
-              color={card.color} />
+              color={card.color}
+              keyword={card.keyword} />
     });
     return connectDropTarget(
       <div className="list">

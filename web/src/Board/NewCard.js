@@ -116,7 +116,7 @@ class NewCard extends Component{
     cardCallbacks: PropTypes.object,
   };
 
-  const annotate=function(obj){
+  function annotate(obj){
     var data=[];
     console.log("inside annotate");
     retext()
