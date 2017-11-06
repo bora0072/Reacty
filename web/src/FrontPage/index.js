@@ -412,4 +412,3 @@ const annotate=function(obj){
 }
 
 export default Frontpage;
-ReactDOM.render(<Container/>, document.getElementById('root'));

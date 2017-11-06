@@ -12,7 +12,7 @@ class App extends Component {
   render() {
 
     // this.props has a bunch of stuff in it related to auth0 (from `withAuth` below)
-     console.log('props', this.props);
+     //console.log('props', this.props);
 
     return (
       <div className="App">

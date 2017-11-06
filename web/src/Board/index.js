@@ -1,6 +1,4 @@
-//import React, { Component } from 'react';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import update from 'react-addons-update';
 import './index.css';
 
@@ -10,24 +8,36 @@ import KanbanBoard from './kanbanBoard';
 class Board extends React.Component {
   constructor(props){
     super(props);
+    this.isAuthenticated = this.props.isAuthenticated.bind(this);
     this.state = {
       cards: []
     }
   }
 
   componentDidMount() {
-    fetch('/api/db/cards')
+
+    if(this.isAuthenticated() && !!this.props.profile){
+      var userHeader = new Headers();
+      userHeader.append("username", this.props.profile.name);
+
+      fetch('/api/db/createuserIfAbsent',{headers: userHeader})
       .then(res => res.json())
-      .then(json => {
-        this.setState({cards: json});
-      })
+      .then(data => console.log(data))
       .catch(function (error) {
-        console.log(error);
-      });
+          console.log(error);
+        });
+
+      fetch('/api/db/cards',{headers: userHeader})
+      .then(res => res.json())
+      .then(json => {this.setState({cards: json});})
+      .catch(function (error) {
+          console.log(error);
+        });
+      }
   }
 
   addTask(cardId, taskName){
-    let cardIndex = this.state.cards.findIndex((card) => card.id == cardId);
+    let cardIndex = this.state.cards.findIndex((card) => card.id === cardId);
 
     //new task create with given name and temp Id
     let newTask = { id: Date.now(), name: taskName, done: false};
@@ -54,7 +64,7 @@ class Board extends React.Component {
   }
 
   deleteTask(cardId, taskId, taskIndex){
-    let cardIndex = this.state.cards.findIndex((card)=>card.id == cardId);
+    let cardIndex = this.state.cards.findIndex((card)=>card.id === cardId);
 
     //new Object without the task
     let nextState = update(this.state.cards, {
@@ -70,7 +80,7 @@ class Board extends React.Component {
 
 
   toggleTask(cardId, taskId, taskIndex){
-    let cardIndex = this.state.cards.findIndex((card) => card.id == cardId);
+    let cardIndex = this.state.cards.findIndex((card) => card.id === cardId);
     //Save ref to tasks's 'done' value
     let newDoneValue;
     // $apply to change done value to opposite
@@ -98,7 +108,7 @@ class Board extends React.Component {
   render(){
 
       let landingPage = <div>Please login to use KanbanBoard</div>;
-      if (this.props.profile) {
+      if (this.isAuthenticated() && !!this.props.profile) {
         landingPage = (
           <KanbanBoard cards={this.state.cards}
             taskCallbacks={{

@@ -20,7 +20,7 @@ const checkJwt = jwt({
   }),
 
   // Validate the audience and the issuer.
-  audience: process.env.AUTH0_API_ID,
+  audience: 'https://wdevils.auth0.com/api/v2/',
   issuer: `https://${process.env.AUTH0_DOMAIN}/`,
   algorithms: ['RS256']
 });

@@ -5,8 +5,8 @@ const checkJwt = require('../auth').checkJwt;
 const fetch = require('node-fetch');
 
 // simple API call, no authentication or user info
-router.get('/unprotected', function(req, res, next) {
-
+router.get('/public', function(req, res, next) {
+console.log('auth0....... user id:', req.user);
   req.db.collection('max_todo').find().toArray(function(err, results) {
     if (err) {
       next(err);
@@ -20,7 +20,7 @@ router.get('/unprotected', function(req, res, next) {
 });
 
 // checkJwt middleware will enforce valid authorization token
-router.get('/protected', checkJwt, function(req, res, next) {
+router.get('/private', checkJwt, function(req, res, next) {
 
   req.db.collection('max_todo').find().toArray(function(err, results) {
     if (err) {
@@ -33,7 +33,7 @@ router.get('/protected', checkJwt, function(req, res, next) {
   });
 
   // the auth0 user identifier for connecting users with data
-  console.log('auth0 user id:', req.user.sub);
+  console.log('auth0....... user id:', req.user.sub);
 
   // fetch info about the user (this isn't useful here, just for demo)
   const userInfoUrl = req.user.aud[1];
@@ -47,24 +47,36 @@ router.get('/protected', checkJwt, function(req, res, next) {
 
 });
 
+/*Creating a new user*/
+router.get('/createuserIfAbsent',function(req,res,next){
+  req.db.collection('TaskCollection').find({"name": req.headers['username']}).toArray(function(err, results){
+      console.log("User in db earlier" + results);
+      if(results.length == 0){ //If no user
+          results =  {
+          "name": String(req.headers['username']),
+          "cards":[]
+        }
+
+        console.log("User not in db ... creating user" + results);
+        req.db.collection('TaskCollection').insert(results);
+        console.log('User ' + req.headers['username'] + 'created successfuly');
+      }
+    });
+});
 
 
-router.get('/allcards',checkJwt,function(req,res,next){
-  req.db.collection('TaskCollection').find().toArray(function(err,results){
+/*GET all cards as JSON */
+router.get('/cards', function(req, res, next) {
+  console.log(req.headers['username']);
+  //console.log('auth0 user id:', req.user.sub);
+
+  req.db.collection('TaskCollection').find({"name": req.headers['username']}).toArray(function(err,results){
     if(err){
       next(err);
     }
-    res.json({
-      cards:results
-    });
-      console.log(results);
+    res.send(results[0].cards);
+    console.log("These are cards for user  " + JSON.stringify(results[0].cards));
   });
-
-});
-var cards = require('../data/cards.json')
-/*GET all movies as JSON */
-router.get('/cards', function(req, res, next) {
-  res.send(cards);
 });
 
 router.get('/example', function(req, res, next) {
