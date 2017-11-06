@@ -4,6 +4,7 @@ var router = express.Router();
 const checkJwt = require('../auth').checkJwt;
 const fetch = require('node-fetch');
 
+
 // simple API call, no authentication or user info
 router.get('/public', function(req, res, next) {
 console.log('auth0....... user id:', req.user);
@@ -67,7 +68,7 @@ router.get('/createuserIfAbsent',function(req,res,next){
 
 /*GET all cards as JSON */
 router.get('/cards', function(req, res, next) {
-  console.log(req.headers['username']);
+  //console.log(req.headers['username']);
   //console.log('auth0 user id:', req.user.sub);
 
   req.db.collection('TaskCollection').find({"name": req.headers['username']}).toArray(function(err,results){
@@ -75,10 +76,31 @@ router.get('/cards', function(req, res, next) {
       next(err);
     }
     res.send(results[0].cards);
-    console.log("These are cards for user  " + JSON.stringify(results[0].cards));
+    //console.log("These are cards for user  " + JSON.stringify(results[0].cards));
   });
 });
 
+<<<<<<< HEAD
+=======
+/*Create a Task for a cardId*/
+router.post('/cards/:cardId/tasks',function(req,res,next){
+  req.db.collection('TaskCollection').updateOne({"name":req.headers['username'], "cards.id":parseInt(req.params.cardId)},
+        {"$push":
+              {"cards.$.tasks":req.body}
+
+        },function(err,documents){
+          res.send({ error: err, affected: documents });
+        });
+
+  });
+/*Add a card */
+router.post('/cards', function(req, res, next){
+  req.db.collection('TaskCollection').updateOne({"name": req.headers['username']}, {$push:{ "cards": req.body }}, function (err, documents) {
+        res.send({ error: err, affected: documents });
+    });
+});
+
+>>>>>>> db91e36fd43805f6ff20e7a7f8d4c8808a7dd908
 router.get('/example', function(req, res, next) {
   var foo = {
     message: 'hello from express!'
@@ -87,5 +109,27 @@ router.get('/example', function(req, res, next) {
   res.send(foo);
 });
 
+
+// function createNewTaskSequence(req,cardId){
+//   var ret = req.db.collection('counters').insert(
+//      {
+//         id: cardId,
+//         seq: 0,
+//      }
+//   );
+// }
+
+// function getNextSequence(req,cardId) {
+//
+//    var ret = req.db.collection('counters').findAndModify(
+//           {
+//             query: { id: 3 },
+//             update: { $inc: { seq: 1 } },
+//             new: true
+//           }
+//    );
+//    console.log(ret,ret.seq);
+//    return ret.seq;
+// }
 
 module.exports = router;
