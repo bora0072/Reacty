@@ -77,9 +77,12 @@ class Board extends React.Component {
                     [cardIndex]: { tasks: {$splice: [[taskIndex, 1]]}}
                     });
     this.setState({cards: nextState});
-
+    var userHeader = new Headers();
+    userHeader.append("username", this.props.profile.name);    //lastly call the api to add the task on the server
+    userHeader.append('content-type', 'application/json');
     fetch(`/api/db/cards/${cardId}/tasks/${taskId}`,{
-      method: 'delete'
+      method: 'delete',
+      headers: userHeader
     });
 
   }

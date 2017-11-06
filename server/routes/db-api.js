@@ -98,6 +98,23 @@ router.post('/cards', function(req, res, next){
     });
 });
 
+//Deleting a task
+router.delete('/cards/:cardId/tasks/:taskId', function(req, res, next){
+  req.db.collection('TaskCollection').find({
+      "name": req.headers['username'],
+    }, { "cards.id": parseInt(req.params.cardId),'cards.tasks':1, '_id': 0}).toArray(function (err, results) {
+        var allTasks = getObjects(results, 'id', parseInt(req.params.cardId))[0].tasks;
+        findAndRemove(allTasks, 'id', parseInt(req.params.taskId));
+        req.db.collection('TaskCollection').updateOne({ "name": req.headers['username'], "cards.id": parseInt(req.params.cardId)},
+            {
+              "$set":
+                {"cards.$.tasks": allTasks}
+            }, function (err, documents) {
+              res.send({ error: err, affected: documents });
+          });
+      });
+});
+
 router.get('/example', function(req, res, next) {
   var foo = {
     message: 'hello from express!'
@@ -106,6 +123,26 @@ router.get('/example', function(req, res, next) {
   res.send(foo);
 });
 
+function getObjects(obj, key, val) {
+    var objects = [];
+    for (var i in obj) {
+        if (!obj.hasOwnProperty(i)) continue;
+        if (typeof obj[i] == 'object') {
+            objects = objects.concat(getObjects(obj[i], key, val));
+        } else if (i == key && obj[key] == val) {
+            objects.push(obj);
+        }
+    }
+    return objects;
+}
+
+function findAndRemove(array, property, value) {
+  array.forEach(function(result, index) {
+    if(result[property] === value) {
+      array.splice(index, 1);
+    }
+  });
+}
 
 // function createNewTaskSequence(req,cardId){
 //   var ret = req.db.collection('counters').insert(
