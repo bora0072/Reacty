@@ -107,9 +107,12 @@ class Board extends React.Component {
                           }
                         });
         this.setState({cards: nextState});
-
+        var userHeader = new Headers();
+        userHeader.append("username", this.props.profile.name);    //lastly call the api to add the task on the server
+        userHeader.append('content-type', 'application/json');
         fetch(`api/db/cards/${cardId}/tasks/${taskId}`, {
           method: 'put',
+          headers: userHeader,
           body: JSON.stringify({done: newDoneValue})
         });
   }
