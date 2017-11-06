@@ -24,6 +24,7 @@
     "express-mongo-db": "^2.0.3",
     "gridfs-stream": "^1.1.1",
     "hbs": "~4.0.1",
+    "history": "^4.7.2",
     "jwks-rsa": "^1.2.1",
     "marked": "^0.3.6",
     "morgan": "~1.8.1",
@@ -35,6 +36,7 @@
     "react-addons-update": "^15.6.2",
     "react-dnd": "^2.5.4",
     "react-dnd-html5-backend": "^1.0.0",
+    "react-router": "^4.2.0",
     "retext": "^5.0.0",
     "retext-keywords": "^4.0.1",
     "serve-favicon": "~2.4.2"
