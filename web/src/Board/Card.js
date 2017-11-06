@@ -101,6 +101,7 @@ Card.propTypes = {
   id: PropTypes.number,
   title: titlePropType,
   description: PropTypes.string,
+  keyword: PropTypes.string,
   color: PropTypes.string,
   taskCallbacks: PropTypes.object,
   tasks: PropTypes.arrayOf(PropTypes.object),

@@ -130,13 +130,6 @@ class NewCard extends Component{
           data.push(obj);
         });
 
-        //keyphrases
-        file.data.keyphrases.forEach(function (phrase) {
-          var obj=phrase.matches[0].nodes.map(nlcstToString).join('');
-          data.push(obj);
-        });
-
-        //console.log(data);
       }
     );
    return data;
