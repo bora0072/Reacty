@@ -4,6 +4,7 @@ var router = express.Router();
 const checkJwt = require('../auth').checkJwt;
 const fetch = require('node-fetch');
 
+
 // simple API call, no authentication or user info
 router.get('/public', function(req, res, next) {
 console.log('auth0....... user id:', req.user);
@@ -79,6 +80,40 @@ router.get('/cards', function(req, res, next) {
   });
 });
 
+/*Create a Task for a cardId
+fetch(`api/db/cards/${cardId}/tasks`,{
+  method: 'post',
+  body: JSON.stringify(newTask)
+})*/
+
+// router.post('/user/notebook/flashcards', function(req, res, next){
+//   console.log(req.notebook);
+//   req.db.collection('usernotecollection').updateOne({ "name": req.user.displayName, "notebooks.notebookname": notebook},
+//       { "$push":
+//           {"notebooks.$.flashcards": req.body}
+//       }, function (err, documents) {
+//         res.send({ error: err, affected: documents });
+//     });
+// });
+
+router.post('/cards/:cardId/tasks',function(req,res,next){
+  console.log(req.params.cardId);
+  //createNewTaskSequence(req,req.params.cardId);
+  var newTaskID = getNextSequence(req,req.params.cardId);
+  console.log(req.body);
+  console.log(newTaskID);
+  req.body['id']= newTaskID;
+  req.db.collection('TaskCollection').find({"name":req.headers['username'], "cards.id":req.params.cardId}),
+        {"$push":
+              {"cards.$.tasks":req.body}
+
+        },function(err,documents){
+          res.send({newTaskID});
+        }
+
+  console.log("Req body again" + JSON.stringify(req.body));
+  });
+
 router.get('/example', function(req, res, next) {
   var foo = {
     message: 'hello from express!'
@@ -87,5 +122,27 @@ router.get('/example', function(req, res, next) {
   res.send(foo);
 });
 
+
+function createNewTaskSequence(req,cardId){
+  var ret = req.db.collection('counters').insert(
+     {
+        id: cardId,
+        seq: 0,
+     }
+  );
+}
+
+function getNextSequence(req,cardId) {
+
+   var ret = req.db.collection('counters').findAndModify(
+          {
+            query: { id: 3 },
+            update: { $inc: { seq: 1 } },
+            new: true
+          }
+   );
+   console.log(ret,ret.seq);
+   return ret.seq;
+}
 
 module.exports = router;

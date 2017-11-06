@@ -56,6 +56,7 @@ class Board extends React.Component {
     //lastly call the api to add the task on the server
     fetch(`api/db/cards/${cardId}/tasks`,{
       method: 'post',
+      headers:{'content-type': 'application/json'},
       body: JSON.stringify(newTask)
     })
     .then((response) => response.json())
