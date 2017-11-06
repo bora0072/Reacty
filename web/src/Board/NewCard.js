@@ -38,9 +38,6 @@ class NewCard extends Component{
 
   handleSubmit(e){
     e.preventDefault();
-    var userHeader = new Headers();
-    userHeader.append("username", this.props.profile.name);
-    userHeader.append("content-type", 'application/json');
     let newTask = {
       id: this.state.id,
       title: this.state.title,
@@ -51,16 +48,17 @@ class NewCard extends Component{
     }
     fetch(`api/db/cards`,{
       method: 'POST',
-      headers: userHeader,
       body: JSON.stringify(newTask)
     })
     .then((response) => {
-      this.props.history.push("/");
+
+                   this.props.history.push("/");
     });
   }
 
   handleClose(e){
-    this.props.history.push("/");
+
+             this.props.history.push("/");
   }
 
   render(){
