@@ -115,6 +115,31 @@ router.delete('/cards/:cardId/tasks/:taskId', function(req, res, next){
       });
 });
 
+//Editing a flashCard
+router.put('/cards/:cardId/tasks/:taskId', function(req, res, next){
+  //extract all notes for give particular notebook
+  //Query to get all notes for a particular user
+  req.db.collection('TaskCollection').find({
+      "name": req.headers['username'],
+    }, { "cards.id": parseInt(req.params.cardId),'cards.tasks':1, '_id': 0}).toArray(function (err, results) {
+        //res.send(getObjects(results, 'notebookname', 'notebook1')[0].notes);
+        var allTasks = getObjects(results, 'id', parseInt(req.params.cardId))[0].tasks;
+        for(var i=0; i<allTasks.length; i++){
+            if(allTasks[i].id == parseInt(req.params.taskId)){
+              allTasks[i].done = req.body.done;
+            }
+        }
+        //Now again make a call to the db and push back all the notes to the particular notebook
+        req.db.collection('TaskCollection').updateOne({ "name": req.headers['username'], "cards.id": parseInt(req.params.cardId)},
+            {
+              "$set":
+                {"cards.$.tasks": allTasks}
+            }, function (err, documents) {
+              res.send({ error: err, affected: documents });
+          });
+  });
+});
+
 router.get('/example', function(req, res, next) {
   var foo = {
     message: 'hello from express!'
