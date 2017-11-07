@@ -36,11 +36,37 @@ class Search extends React.Component {
     super(props);
 
     this.state = {
-      suggestions: []
+      suggestions: [],
+      cards: []
     };
+    this.isAuthenticated = this.props.isAuthenticated.bind(this);
 
     autoBind(this);
   }
+
+  componentDidMount() {
+
+    if(this.isAuthenticated() && !!this.props.profile){
+      var userHeader = new Headers();
+      userHeader.append("username", this.props.profile.name);
+
+      fetch('/api/db/createuserIfAbsent',{headers: userHeader})
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(function (error) {
+          console.log(error);
+        });
+
+      fetch('/api/db/cards',{headers: userHeader})
+      .then(res => res.json())
+      .then(json => {this.setState({cards: json});})
+      .catch(function (error) {
+          console.log(error);
+        });
+      }
+  }
+
+
 
   handleClear() {
     this.setState({
@@ -76,12 +102,13 @@ class Search extends React.Component {
   }
 
   render() {
-    return (
-      <SearchBar
+    let landingPage = <div></div>;
+    if (this.isAuthenticated() && !!this.props.profile){
+      landingPage= (<SearchBar
         autoFocus
         renderClearButton
         renderSearchButton
-        placeholder="select an SAT word"
+        placeholder="search for a keyword"
         onChange={this.handleChange}
         onClear={this.handleClear}
         onSelection={this.handleSelection}
@@ -90,6 +117,12 @@ class Search extends React.Component {
         suggestionRenderer={this.suggestionRenderer}
         styles={styles}
       />
+    );
+    }
+    return (
+      <div className="search">
+          {landingPage}
+      </div>
     );
   }
 }
