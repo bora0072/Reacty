@@ -6,8 +6,8 @@
     "start": "node ./server/bin/www",
     "dev": "heroku local web,server --procfile Procfile.dev",
     "dev-express": "nodemon ./server/bin/www",
-    "dev-react": "cd web && npm start",
-    "postinstall": "cd web && npm install && npm run build"
+    "dev-react": "cd web ; npm start",
+    "postinstall": "cd web ; npm install ; npm run build"
   },
   "engines": {
     "node": "8.5.x"
@@ -25,6 +25,7 @@
     "gridfs-stream": "^1.1.1",
     "hbs": "~4.0.1",
     "history": "^4.7.2",
+    "immutability-helper": "^2.5.0",
     "jwks-rsa": "^1.2.1",
     "marked": "^0.3.6",
     "morgan": "~1.8.1",
@@ -33,7 +34,6 @@
     "node-fetch": "^1.7.3",
     "prop-types": "^15.6.0",
     "react-addons-css-transition-group": "^15.6.2",
-    "react-addons-update": "^15.6.2",
     "react-dnd": "^2.5.4",
     "react-dnd-html5-backend": "^1.0.0",
     "react-router": "^4.2.0",
