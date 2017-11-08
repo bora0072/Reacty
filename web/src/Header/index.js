@@ -14,7 +14,7 @@ class Header extends Component {
 
         <div className="navbar-item ">
           <a class="navbar-item" href="/search.js">
-          Search
+          KanbanBoard
           </a>
         </div>
 

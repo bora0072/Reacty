@@ -186,7 +186,7 @@ class Board extends React.Component {
 
   render(){
 
-      let landingPage = <div>Please login to use KanbanBoard</div>;
+      let landingPage = <div><h4>Please login to use KanbanBoard</h4></div>;
       if (this.isAuthenticated() && !!this.props.profile) {
         landingPage = (
           <KanbanBoard cards={this.state.cards}

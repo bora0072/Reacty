@@ -26,7 +26,7 @@ export default Search;*/
 import React from 'react';
 import ReactDOM from 'react-dom';
 import autoBind from 'react-autobind';
-
+import '../Board/index.css';
 import SearchBar from './SearchBar';
 import styles from './demo.css';
 import words from './words.json';
@@ -39,8 +39,7 @@ class Search extends React.Component {
       suggestions: [],
       cards: []
     };
-    this.isAuthenticated = this.props.isAuthenticated.bind(this);
-
+this.isAuthenticated = this.props.isAuthenticated.bind(this);
     autoBind(this);
   }
 
@@ -63,9 +62,16 @@ class Search extends React.Component {
       .catch(function (error) {
           console.log(error);
         });
-      }
-  }
 
+
+      }
+
+
+  }
+componentWilMount()
+{
+
+}
 
 
   handleClear() {
@@ -75,10 +81,15 @@ class Search extends React.Component {
   }
 
   handleChange(input) {
+    var keywordList= this.state.cards.map((c) =>
+      c.keyword.map((k)=> k)
+    );
+      console.log(keywordList);
     this.setState({
       suggestions: words.filter(word => word.startsWith(input))
     });
   }
+
 
   handleSelection(value) {
     if (value) {
@@ -102,6 +113,8 @@ class Search extends React.Component {
   }
 
   render() {
+
+
     let landingPage = <div></div>;
     if (this.isAuthenticated() && !!this.props.profile){
       landingPage= (<SearchBar

@@ -12,6 +12,7 @@ body {
   background: #eee;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #293134;
+  background-image: url("woodbg.jpg");
 }
 
 h1{
@@ -189,4 +190,13 @@ ul {
     font-size: 2em;
     margin-bottom: 0.5em;
     color: #FFFFFF
+}
+
+.content h4 {
+    margin-bottom: 0.5em;
+    color: #FFFFFF
+}
+
+.content span,strong {
+color: #FFFFFF
 }
