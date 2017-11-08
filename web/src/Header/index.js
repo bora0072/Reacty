@@ -13,8 +13,8 @@ class Header extends Component {
         </div>
 
         <div className="navbar-item ">
-          <a class="navbar-item" href="/search.js">
-          KanbanBoard
+          <a class="navbar-item" href="/search">
+          KanbanBoard Search
           </a>
         </div>
 

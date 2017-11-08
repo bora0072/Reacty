@@ -27,7 +27,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import autoBind from 'react-autobind';
 import '../Board/index.css';
-import SearchBar from './SearchBar';
+import SearchBar from './search-bar';
 import styles from './demo.css';
 import words from './words.json';
 
@@ -68,11 +68,6 @@ this.isAuthenticated = this.props.isAuthenticated.bind(this);
 
 
   }
-componentWilMount()
-{
-
-}
-
 
   handleClear() {
     this.setState({

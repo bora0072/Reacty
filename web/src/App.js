@@ -23,7 +23,7 @@ class App extends Component {
         </div>
         <section className="section">
           <div className="content">
-            <Route exact path="/" render={props => <Search {...props} {...this.props} />}/>
+            <Route exact path="/search" render={props => <Search {...props} {...this.props} />}/>
             <br/>
             <Route exact path="/" render={props => <Board {...props} {...this.props} />} />
             <Route exact path="/new"  render={props => <NewCard {...props} {...this.props} />} />
