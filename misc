@@ -1,2 +1,5 @@
 To connect to DB
 mongo ds241895.mlab.com:41895/progresstracker -u <dbuser> -p <dbpassword>
+
+
+<pre> {JSON.stringify(this.state)}</pre>

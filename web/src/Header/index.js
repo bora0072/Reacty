@@ -19,8 +19,8 @@ class Header extends Component {
         </div>
 
         <div className="navbar-item">
-          <a class="navbar-item" href="/profile">
-          Profile
+          <a class="navbar-item" href="/demo">
+          Demo
           </a>
         </div>
 
