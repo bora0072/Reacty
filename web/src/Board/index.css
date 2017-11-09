@@ -11,6 +11,7 @@ html,body,#root {
 body {
   background: #eee;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-image: url("woodbg.jpg");
 }
 
 .section {
