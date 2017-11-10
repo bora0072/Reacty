@@ -12,26 +12,42 @@ class CheckList extends Component {
   }
 
   render() {
-    let tasks = this.props.tasks.map((task, taskIndex) => (
-      <li key={task.id} className="checklist__task">
-        <input type="checkbox" checked={task.done}
-        onChange={this.props.taskCallbacks.toggle.bind(null, this.props.cardId, task.id, taskIndex)}
-        />
-        {' '}{task.name}{' '}
-        <a href="#" className="checklist__task--remove"
-        onClick={this.props.taskCallbacks.delete.bind(null, this.props.cardId, task.id, taskIndex)}
-        />
-      </li>
-    ));
-  return (
+    let tasks;
+    if(this.props.display=='current'){
+      tasks = this.props.tasks.map((task, taskIndex) => (
+        <li key={task.id} className="checklist__task">
+          <input type="checkbox" checked={task.done}
+          onChange={this.props.taskCallbacks.toggle.bind(null, this.props.cardId, task.id, taskIndex)}
+          />
+          {' '}{task.name}{' '}
+          <a href="#" className="checklist__task--remove"
+          onClick={this.props.taskCallbacks.delete.bind(null, this.props.cardId, task.id, taskIndex)}
+          />
+        </li>
+      ));
+    }else{
+      tasks = this.props.tasks.map((task, taskIndex) => (
+        <li key={task.id} className="checklist__task">
+          {' '}{task.name}{' '}
+        </li>
+      ));
+    }
+  if(this.props.display=='current'){
+    return (
+          <div className="checklist">
+            <ul>{tasks}</ul>
+            <input type="text"
+                  className="checklist--add-task"
+                  placeholder="Type & hit Enter to add Task"
+                  onKeyPress={this.checkInputKeyPress.bind(this)} />
+          </div>);
+  }else{
+    return(
       <div className="checklist">
         <ul>{tasks}</ul>
-        <input type="text"
-              className="checklist--add-task"
-              placeholder="Type & hit Enter to add Task"
-              onKeyPress={this.checkInputKeyPress.bind(this)} />
       </div>
     );
+  }
   }
 }
 

@@ -68,7 +68,7 @@ class Card extends Component {
         <div className="card__details">
         <span dangerouslySetInnerHTML={{__html:marked(this.props.description)}} />
         <CheckList cardId={this.props.id} taskCallbacks={this.props.taskCallbacks}
-        tasks={this.props.tasks} />
+        tasks={this.props.tasks} display={this.props.display} />
         </div>
       );
     }
