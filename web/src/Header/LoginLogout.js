@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class LoginLogout extends Component {
 
@@ -19,7 +20,7 @@ class LoginLogout extends Component {
     const userDisplay = this.isLoggedIn()
       ? (
         <div className="navbar-item">
-          <span>{this.props.profile.name}</span>
+          <span> <Link to="/profile">{this.props.profile.name}</Link> </span>
         </div>
       ) : null;
 
