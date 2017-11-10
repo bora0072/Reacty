@@ -2,16 +2,16 @@ import React from 'react';
 import update from 'immutability-helper';
 import './index.css';
 import {throttle} from './util';
-
+import {Link} from 'react-router-dom';
 import KanbanBoard from './kanbanBoard';
-
 
 class Board extends React.Component {
   constructor(props){
     super(props);
     this.isAuthenticated = this.props.isAuthenticated.bind(this);
     this.state = {
-      cards: []
+      cards: [],
+      display: 'current'
     }
     this.updateCardStatus = throttle(this.updateCardStatus.bind(this));
     this.updateCardPosition = throttle(this.updateCardPosition.bind(this),500);
@@ -183,13 +183,20 @@ class Board extends React.Component {
       );
     });
   }
-
+  handleClick(type) {
+    this.setState({display:type});
+  }
   render(){
 
       let landingPage = <div><h4>Please login to use KanbanBoard</h4></div>;
       if (this.isAuthenticated() && !!this.props.profile) {
         landingPage = (
-          <KanbanBoard cards={this.state.cards}
+          <div>
+          <Link to='/new' className="float-button">+</Link>
+          <div onClick={(e) => this.handleClick('archive')} className="float-button-backlog">A</div>
+          <div onClick={(e) => this.handleClick('backlog')} className="float-button-archive">B</div>
+          <div onClick={(e) => this.handleClick('current')} className="float-button-current">C</div>
+          <KanbanBoard display={this.state.display} cards={this.state.cards}
             taskCallbacks={{
               toggle: this.toggleTask.bind(this),
               delete: this.deleteTask.bind(this),
@@ -200,6 +207,7 @@ class Board extends React.Component {
               persistCardDrag: this.persistCardDrag.bind(this)
             }}
             />
+            </div>
           );
       }
 
