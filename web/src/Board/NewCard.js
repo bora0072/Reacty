@@ -91,6 +91,7 @@ class NewCard extends Component{
               <option value="todo">To Do</option>
               <option value="in-progress">In Progress</option>
               <option value="done">Done</option>
+              <option value="backlog">Backlog</option>
             </select>
             <br />
             <label htmlFor="color">Color</label>

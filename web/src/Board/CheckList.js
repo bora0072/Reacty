@@ -15,7 +15,7 @@ class CheckList extends Component {
     let tasks;
     if(this.props.display=='current'){
       tasks = this.props.tasks.map((task, taskIndex) => (
-        <li key={task.id} className="checklist__task">
+        <div key={task.id} className="checklist__task">
           <input type="checkbox" checked={task.done}
           onChange={this.props.taskCallbacks.toggle.bind(null, this.props.cardId, task.id, taskIndex)}
           />
@@ -23,7 +23,7 @@ class CheckList extends Component {
           <a href="#" className="checklist__task--remove"
           onClick={this.props.taskCallbacks.delete.bind(null, this.props.cardId, task.id, taskIndex)}
           />
-        </li>
+        </div>
       ));
     }else{
       tasks = this.props.tasks.map((task, taskIndex) => (

@@ -22,6 +22,7 @@ class List extends Component {
     const { connectDropTarget } = this.props;
     var cards = this.props.cards.map((card) => {
       return <Card key={card.id}
+              status={this.props.status}
               display={this.props.display}
               taskCallbacks={this.props.taskCallbacks}
               cardCallbacks={this.props.cardCallbacks}

@@ -5,6 +5,7 @@ import { DragSource, DropTarget } from 'react-dnd';
 import constants from './constants';
 import marked from 'marked';
 import PropTypes from 'prop-types';
+import 'font-awesome/css/font-awesome.css';
 
 let titlePropType = (props, propName, componentName) => {
   if (props[propName]) {
@@ -72,6 +73,16 @@ class Card extends Component {
         </div>
       );
     }
+    let iconDetails;
+    if(this.props.status=='done'){
+      iconDetails = (
+        <div className="level-item">
+          <a
+           onClick={this.props.taskCallbacks.archive.bind(null, this.props.id)}
+          ><span className="fa fa-archive"></span>archive</a>
+        </div>
+      );
+    }
 
     let sideColor = {
     position: 'absolute',
@@ -87,6 +98,7 @@ class Card extends Component {
         <div style={sideColor}/>
           <div className={this.state.showDetails ? "card__title card__title--is-open" : "card__title"}
           onClick={this.toggleDetails.bind(this)}>{this.props.title}</div>
+          {iconDetails}
           <ReactCSSTransitionGroup transitionName="toggle"
             transitionEnterTimeout={250}
             transitionLeaveTimeout={250} >
