@@ -77,9 +77,15 @@ class Card extends Component {
     if(this.props.status=='done'){
       iconDetails = (
         <div className="level-item">
-          <a
-           onClick={this.props.taskCallbacks.archive.bind(null, this.props.id)}
+          <a onClick={this.props.taskCallbacks.archive.bind(null, this.props.id)}
           ><span className="fa fa-archive"></span>archive</a>
+        </div>
+      );
+    }else if(this.props.display=='backlog'){
+      iconDetails = (
+        <div className="level-item">
+          <a onClick={this.props.taskCallbacks.revertBacklog.bind(null, this.props.id)}
+          ><span className="fa fa-play-circle" aria-hidden="true"></span>Start</a>
         </div>
       );
     }

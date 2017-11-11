@@ -206,6 +206,27 @@ class Board extends React.Component {
   handleClick(type) {
     this.setState({display:type});
   }
+  startTask (cardId) {
+    let cardIndex = this.state.cards.findIndex((card)=>card.id == cardId);
+    let nextState = update(this.state.cards, {
+                    [cardIndex]: { status: {$set: 'todo'}}
+                    });
+    this.setState({cards: nextState});
+    var userHeader = new Headers();
+    userHeader.append("username", this.props.profile.name);
+    userHeader.append('content-type', 'application/json');
+    fetch(`api/db/cards/${cardId}`, {
+      method: 'put',
+      headers : userHeader,
+      body: JSON.stringify({status: 'todo'})
+    })
+    .then((response) => {
+      if(!response.ok){
+        // Throw an error if server response wasn't 'ok'
+        throw new Error("Server response wasn't OK")
+      }
+    });
+  }
   render(){
 
       let landingPage = <div><h4>Please login to use KanbanBoard</h4></div>;
@@ -221,6 +242,7 @@ class Board extends React.Component {
               toggle: this.toggleTask.bind(this),
               delete: this.deleteTask.bind(this),
               archive: this.archiveTask.bind(this),
+              revertBacklog: this.startTask.bind(this),
               add: this.addTask.bind(this) }}
             cardCallbacks={{
               updateStatus: this.updateCardStatus,
