@@ -5,6 +5,7 @@ import { DragSource, DropTarget } from 'react-dnd';
 import constants from './constants';
 import marked from 'marked';
 import PropTypes from 'prop-types';
+import 'font-awesome/css/font-awesome.css';
 
 let titlePropType = (props, propName, componentName) => {
   if (props[propName]) {
@@ -68,7 +69,23 @@ class Card extends Component {
         <div className="card__details">
         <span dangerouslySetInnerHTML={{__html:marked(this.props.description)}} />
         <CheckList cardId={this.props.id} taskCallbacks={this.props.taskCallbacks}
-        tasks={this.props.tasks} />
+        tasks={this.props.tasks} display={this.props.display} />
+        </div>
+      );
+    }
+    let iconDetails;
+    if(this.props.status=='done'){
+      iconDetails = (
+        <div className="level-item">
+          <a onClick={this.props.taskCallbacks.archive.bind(null, this.props.id)}
+          ><span className="fa fa-archive"></span>archive</a>
+        </div>
+      );
+    }else if(this.props.display=='backlog'){
+      iconDetails = (
+        <div className="level-item">
+          <a onClick={this.props.taskCallbacks.revertBacklog.bind(null, this.props.id)}
+          ><span className="fa fa-play-circle" aria-hidden="true"></span>Start</a>
         </div>
       );
     }
@@ -87,6 +104,7 @@ class Card extends Component {
         <div style={sideColor}/>
           <div className={this.state.showDetails ? "card__title card__title--is-open" : "card__title"}
           onClick={this.toggleDetails.bind(this)}>{this.props.title}</div>
+          {iconDetails}
           <ReactCSSTransitionGroup transitionName="toggle"
             transitionEnterTimeout={250}
             transitionLeaveTimeout={250} >
