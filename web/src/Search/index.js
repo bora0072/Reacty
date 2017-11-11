@@ -1,27 +1,4 @@
-/*import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
-import { Link } from 'react-router-dom';
-import SearchBar from './SearchBar';
 
-class Search extends Component {
-  render(){
-    return (
-      <div className="search">
-        <SearchBar props={this.props}/>
-      </div>
-    );
-  };
-}
-
-Search.propTypes = {
-  cards: PropTypes.arrayOf(PropTypes.object),
-  taskCallbacks : PropTypes.object,
-  cardCallbacks : PropTypes.object
-};
-
-export default Search;*/
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -37,7 +14,8 @@ class Search extends React.Component {
 
     this.state = {
       suggestions: [],
-      cards: []
+      cards: [],
+      selects: ''
     };
 this.isAuthenticated = this.props.isAuthenticated.bind(this);
     autoBind(this);
@@ -79,21 +57,32 @@ this.isAuthenticated = this.props.isAuthenticated.bind(this);
     var keywordList= this.state.cards.map((c) =>
       c.keyword.map((k)=> k)
     );
-      console.log(keywordList);
-    this.setState({
-      suggestions: words.filter(word => word.startsWith(input))
-    });
+    var data=[];
+      for(var i=0;i<keywordList.length;i++){
+        for(var j=0;j<keywordList[i].length;j++)
+        data.push(keywordList[i][j]);
+      }
+        console.log(data);
+        console.log(words);
+      this.setState({
+        suggestions: data.filter(word => word.startsWith(input))
+      });
+      console.log(this.state.suggestions);
   }
 
 
   handleSelection(value) {
     if (value) {
-      console.info(`Selected "${value}"`);
+      this.setState({
+        selects: value
+      });
+
     }
   }
 
   handleSearch(value) {
     if (value) {
+        console.log(this.state.selects);
       console.info(`Searching "${value}"`);
     }
   }
@@ -110,7 +99,7 @@ this.isAuthenticated = this.props.isAuthenticated.bind(this);
   render() {
 
 
-    let landingPage = <div></div>;
+    let landingPage = <div><h4>Please login to Search</h4></div>;
     if (this.isAuthenticated() && !!this.props.profile){
       landingPage= (<SearchBar
         autoFocus
