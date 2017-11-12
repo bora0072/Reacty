@@ -67,15 +67,9 @@ ul {
   border: 1px solid #e5e5df;
   border-radius: 3px;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #E0E2E4;
-  opacity: 0.7;
-  filter: alpha(opacity=50);
+  background-color: #FDFEFE;;
 }
 
-.card:hover {
-  opacity: 1.0;
-  filter: alpha(opacity=100);
-}
 
 .card__title {
   font-weight: bold;
@@ -295,6 +289,7 @@ input {
   margin: 0;
   padding: 10px 0 10px 10px;
   width: 100%;
+  background-color: #E5E7E9;
 }
 
 .clear-button,
@@ -357,4 +352,80 @@ input {
 
 .suggestion:last-child {
   border: none;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 18px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  left: 1px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.tag{
+  font-weight: bold;
+  margin-left: 5px;
+  min-width: 3rem;
+}
+
+ul.tags{
+  display: inline-flex;
+  list-style: none;
+}
+
+.card-content {
+    padding: 0.5rem;
+}
+
+.card-header{
+  background-color: #BFC9CA;
+  color: black;
 }

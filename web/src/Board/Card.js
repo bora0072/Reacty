@@ -67,9 +67,8 @@ class Card extends Component {
     if(this.state.showDetails){
       cardDetails = (
         <div className="card__details">
-        <span dangerouslySetInnerHTML={{__html:marked(this.props.description)}} />
-        <CheckList cardId={this.props.id} taskCallbacks={this.props.taskCallbacks}
-        tasks={this.props.tasks} display={this.props.display} />
+        <CheckList keyword={this.props.keyword} cardId={this.props.id} taskCallbacks={this.props.taskCallbacks}
+        tasks={this.props.tasks} description={this.props.description} display={this.props.display} />
         </div>
       );
     }
