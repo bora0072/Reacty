@@ -9,6 +9,7 @@ class NewCard extends Component{
 
   constructor(props){
     super(props);
+    this.isAuthenticated = this.props.isAuthenticated.bind(this);
     this.state ={
       id: Date.now(),
       title:'',
@@ -23,8 +24,18 @@ class NewCard extends Component{
      this.handlecolor = this.handlecolor.bind(this);
   }
   componentWillMount(){
+    if(this.isAuthenticated() && !!this.props.profile){
+      var userHeader = new Headers();
+      userHeader.append("username", this.props.profile.name);
 
+      fetch('/api/db/createuserIfAbsent',{headers: userHeader})
+      .then(res => res.json())
+      .then(data => (console.log(data)))
+      .catch(function (error) {
+          console.log(error);
+        });
   }
+}
 
   handleChange(event){
     this.setState({title: event.target.value});
@@ -45,7 +56,6 @@ class NewCard extends Component{
     userHeader.append("username", this.props.profile.name);
     userHeader.append("content-type", 'application/json');
     var keyword=annotate(""+this.state.title+" "+this.state.description);
-    console.log(keyword);
     let newTask = {
       id: this.state.id,
       title: this.state.title,
@@ -119,7 +129,6 @@ class NewCard extends Component{
 
   function annotate(obj){
     var data=[];
-    console.log("inside annotate");
     retext()
       .use(keywords)
       .process(obj, function (err, file) {

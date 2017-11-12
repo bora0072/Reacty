@@ -59,8 +59,12 @@ router.get('/createuserIfAbsent',function(req,res,next){
         }
 
         console.log("User not in db ... creating user" + results);
-        req.db.collection('TaskCollection').insert(results);
-        console.log('User ' + req.headers['username'] + 'created successfuly');
+        req.db.collection('TaskCollection').insert(results,function(err,documents){
+          console.log('User ' + req.headers['username'] + 'created successfuly');
+          res.send("User Created");
+        });
+      }else{
+          res.send("User Already Present");
       }
     });
 });
@@ -75,7 +79,11 @@ router.get('/cards', function(req, res, next) {
     if(err){
       next(err);
     }
-    res.send(results[0].cards);
+    if(results.length==0){
+      res.send([]);
+    }else{
+      res.send(results[0].cards);
+    }
     //console.log("These are cards for user  " + JSON.stringify(results[0].cards));
   });
 });

@@ -5,6 +5,7 @@ import {throttle} from './util';
 import {Link} from 'react-router-dom';
 import KanbanBoard from './kanbanBoard';
 import NotLogin from '../NotLogin';
+import 'whatwg-fetch';
 
 class Board extends React.Component {
   constructor(props){
@@ -31,7 +32,7 @@ class Board extends React.Component {
           console.log(error);
         });
 
-      fetch('/api/db/cards',{headers: userHeader})
+      let fetchCards = fetch('/api/db/cards',{headers: userHeader})
       .then(res => res.json())
       .then(json => {this.setState({cards: json});})
       .catch(function (error) {
