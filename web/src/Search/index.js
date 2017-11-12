@@ -1,27 +1,4 @@
-/*import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
-import { Link } from 'react-router-dom';
-import SearchBar from './SearchBar';
 
-class Search extends Component {
-  render(){
-    return (
-      <div className="search">
-        <SearchBar props={this.props}/>
-      </div>
-    );
-  };
-}
-
-Search.propTypes = {
-  cards: PropTypes.arrayOf(PropTypes.object),
-  taskCallbacks : PropTypes.object,
-  cardCallbacks : PropTypes.object
-};
-
-export default Search;*/
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -31,13 +8,19 @@ import SearchBar from './search-bar';
 import styles from './demo.css';
 import words from './words.json';
 
+import {Link} from 'react-router-dom';
+import KBoard from './kBoard';
+
 class Search extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       suggestions: [],
-      cards: []
+      cards: [],
+      selects: '',
+      display: 'current',
+      discards: []
     };
 this.isAuthenticated = this.props.isAuthenticated.bind(this);
     autoBind(this);
@@ -79,23 +62,42 @@ this.isAuthenticated = this.props.isAuthenticated.bind(this);
     var keywordList= this.state.cards.map((c) =>
       c.keyword.map((k)=> k)
     );
-      console.log(keywordList);
-    this.setState({
-      suggestions: words.filter(word => word.startsWith(input))
-    });
+    var data=[];
+      for(var i=0;i<keywordList.length;i++){
+        for(var j=0;j<keywordList[i].length;j++)
+        data.push(keywordList[i][j]);
+      }
+        console.log(data);
+        console.log(words);
+      this.setState({
+        suggestions: data.filter(word => word.startsWith(input))
+      });
+      console.log(this.state.suggestions);
   }
 
 
   handleSelection(value) {
     if (value) {
-      console.info(`Selected "${value}"`);
+      this.setState({
+        selects: value
+      });
+
     }
   }
 
   handleSearch(value) {
     if (value) {
+        console.log(this.state.selects);
       console.info(`Searching "${value}"`);
     }
+    var dcards= this.state.cards.map((c) =>
+      c.keyword.map((k)=>{
+      if(k == this.state.selects)
+      {
+        this.setState({discards : c});
+      }})
+    );
+    console.log(this.state.discards);
   }
 
   suggestionRenderer(suggestion, searchTerm) {
@@ -107,12 +109,18 @@ this.isAuthenticated = this.props.isAuthenticated.bind(this);
     );
   }
 
+  handleClick(type) {
+    this.setState({display:type});
+  }
+
   render() {
 
 
-    let landingPage = <div></div>;
+    let landingPage = <div><h4>Please login to Search</h4></div>;
     if (this.isAuthenticated() && !!this.props.profile){
-      landingPage= (<SearchBar
+      landingPage= (
+<div>
+        <SearchBar
         autoFocus
         renderClearButton
         renderSearchButton
@@ -125,7 +133,16 @@ this.isAuthenticated = this.props.isAuthenticated.bind(this);
         suggestionRenderer={this.suggestionRenderer}
         styles={styles}
       />
+      <br/>
+      <div onClick={(e) => this.handleClick('archive')} className="float-button-backlog">A</div>
+      <div onClick={(e) => this.handleClick('backlog')} className="float-button-archive">B</div>
+      <div onClick={(e) => this.handleClick('current')} className="float-button-current">C</div>
+      <KBoard selects={this.state.selects} cards={this.state.discards}
+        />
+        </div>
     );
+
+
     }
     return (
       <div className="search">

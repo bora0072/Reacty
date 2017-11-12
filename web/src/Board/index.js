@@ -152,7 +152,27 @@ class Board extends React.Component {
         }));
     }
   }
-
+  archiveTask (cardId) {
+    let cardIndex = this.state.cards.findIndex((card)=>card.id == cardId);
+    let nextState = update(this.state.cards, {
+                    [cardIndex]: { status: {$set: 'archive'}}
+                    });
+    this.setState({cards: nextState});
+    var userHeader = new Headers();
+    userHeader.append("username", this.props.profile.name);
+    userHeader.append('content-type', 'application/json');
+    fetch(`api/db/cards/${cardId}`, {
+      method: 'put',
+      headers : userHeader,
+      body: JSON.stringify({status: 'archive'})
+    })
+    .then((response) => {
+      if(!response.ok){
+        // Throw an error if server response wasn't 'ok'
+        throw new Error("Server response wasn't OK")
+      }
+    });
+  }
   persistCardDrag (cardId, status) {
     var userHeader = new Headers();
     userHeader.append("username", this.props.profile.name);    //lastly call the api to add the task on the server
@@ -188,6 +208,27 @@ class Board extends React.Component {
   handleClick(type) {
     this.setState({display:type});
   }
+  startTask (cardId) {
+    let cardIndex = this.state.cards.findIndex((card)=>card.id == cardId);
+    let nextState = update(this.state.cards, {
+                    [cardIndex]: { status: {$set: 'todo'}}
+                    });
+    this.setState({cards: nextState});
+    var userHeader = new Headers();
+    userHeader.append("username", this.props.profile.name);
+    userHeader.append('content-type', 'application/json');
+    fetch(`api/db/cards/${cardId}`, {
+      method: 'put',
+      headers : userHeader,
+      body: JSON.stringify({status: 'todo'})
+    })
+    .then((response) => {
+      if(!response.ok){
+        // Throw an error if server response wasn't 'ok'
+        throw new Error("Server response wasn't OK")
+      }
+    });
+  }
   render(){
 
       let landingPage = <div><NotLogin/></div>;
@@ -202,6 +243,8 @@ class Board extends React.Component {
             taskCallbacks={{
               toggle: this.toggleTask.bind(this),
               delete: this.deleteTask.bind(this),
+              archive: this.archiveTask.bind(this),
+              revertBacklog: this.startTask.bind(this),
               add: this.addTask.bind(this) }}
             cardCallbacks={{
               updateStatus: this.updateCardStatus,

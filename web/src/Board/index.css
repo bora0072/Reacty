@@ -93,10 +93,12 @@ ul {
   content: '▾';
 }
 
-.checklist__task:first-child {
+.checklist__task {
   margin-top: 10px;
   padding-top: 10px;
   border-top: dashed 1px #ddd;
+  margin-left: -31px;
+  margin-bottom: -23px;
 }
 
 .checklist__task--remove:after{
