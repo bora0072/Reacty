@@ -4,7 +4,7 @@ import './index.css';
 import {throttle} from './util';
 import {Link} from 'react-router-dom';
 import KanbanBoard from './kanbanBoard';
-import NotLogin from './NotLogin';
+import NotLogin from '../NotLogin';
 
 class Board extends React.Component {
   constructor(props){
