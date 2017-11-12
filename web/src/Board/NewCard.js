@@ -44,7 +44,7 @@ class NewCard extends Component{
     var userHeader = new Headers();
     userHeader.append("username", this.props.profile.name);
     userHeader.append("content-type", 'application/json');
-    var keyword=annotate(""+this.state.title+" "+this.state.description);
+    var keyword=annotate(" "+this.state.description);
     console.log(keyword);
     let newTask = {
       id: this.state.id,
@@ -121,7 +121,7 @@ class NewCard extends Component{
     var data=[];
     console.log("inside annotate");
     retext()
-      .use(keywords)
+      .use(keywords, 2)
       .process(obj, function (err, file) {
         if (err) throw err;
 
