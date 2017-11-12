@@ -4,6 +4,7 @@ import './index.css';
 import {throttle} from './util';
 import {Link} from 'react-router-dom';
 import KanbanBoard from './kanbanBoard';
+import NotLogin from './NotLogin';
 
 class Board extends React.Component {
   constructor(props){
@@ -37,6 +38,7 @@ class Board extends React.Component {
           console.log(error);
         });
       }
+
   }
   //TODO: Handle rolebacks for all the fethc Calls
   addTask(cardId, taskName){
@@ -188,7 +190,7 @@ class Board extends React.Component {
   }
   render(){
 
-      let landingPage = <div><h4>Please login to use KanbanBoard</h4></div>;
+      let landingPage = <div><NotLogin/></div>;
       if (this.isAuthenticated() && !!this.props.profile) {
         landingPage = (
           <div>
@@ -210,6 +212,8 @@ class Board extends React.Component {
             </div>
           );
       }
+
+
 
       return(
         <div className="KBoard">
