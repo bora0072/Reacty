@@ -94,7 +94,7 @@ this.isAuthenticated = this.props.isAuthenticated.bind(this);
       c.keyword.map((k)=>{
       if(k == this.state.selects)
       {
-        this.setState({discards : 'c'});
+        this.setState({discards : c});
       }})
     );
     console.log(this.state.discards);
@@ -137,7 +137,7 @@ this.isAuthenticated = this.props.isAuthenticated.bind(this);
       <div onClick={(e) => this.handleClick('archive')} className="float-button-backlog">A</div>
       <div onClick={(e) => this.handleClick('backlog')} className="float-button-archive">B</div>
       <div onClick={(e) => this.handleClick('current')} className="float-button-current">C</div>
-      <KBoard selects={this.state.selects} cards={this.state.cards}
+      <KBoard selects={this.state.selects} cards={this.state.discards}
         />
         </div>
     );
