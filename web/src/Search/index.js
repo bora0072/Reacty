@@ -8,6 +8,9 @@ import SearchBar from './search-bar';
 import styles from './demo.css';
 import words from './words.json';
 
+import {Link} from 'react-router-dom';
+import KBoard from './kBoard';
+
 class Search extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +18,9 @@ class Search extends React.Component {
     this.state = {
       suggestions: [],
       cards: [],
-      selects: ''
+      selects: '',
+      display: 'current',
+      discards: []
     };
 this.isAuthenticated = this.props.isAuthenticated.bind(this);
     autoBind(this);
@@ -85,6 +90,14 @@ this.isAuthenticated = this.props.isAuthenticated.bind(this);
         console.log(this.state.selects);
       console.info(`Searching "${value}"`);
     }
+    var dcards= this.state.cards.map((c) =>
+      c.keyword.map((k)=>{
+      if(k == this.state.selects)
+      {
+        this.setState({discards : 'c'});
+      }})
+    );
+    console.log(this.state.discards);
   }
 
   suggestionRenderer(suggestion, searchTerm) {
@@ -96,12 +109,18 @@ this.isAuthenticated = this.props.isAuthenticated.bind(this);
     );
   }
 
+  handleClick(type) {
+    this.setState({display:type});
+  }
+
   render() {
 
 
     let landingPage = <div><h4>Please login to Search</h4></div>;
     if (this.isAuthenticated() && !!this.props.profile){
-      landingPage= (<SearchBar
+      landingPage= (
+<div>
+        <SearchBar
         autoFocus
         renderClearButton
         renderSearchButton
@@ -114,7 +133,16 @@ this.isAuthenticated = this.props.isAuthenticated.bind(this);
         suggestionRenderer={this.suggestionRenderer}
         styles={styles}
       />
+      <br/>
+      <div onClick={(e) => this.handleClick('archive')} className="float-button-backlog">A</div>
+      <div onClick={(e) => this.handleClick('backlog')} className="float-button-archive">B</div>
+      <div onClick={(e) => this.handleClick('current')} className="float-button-current">C</div>
+      <KBoard selects={this.state.selects} cards={this.state.cards}
+        />
+        </div>
     );
+
+
     }
     return (
       <div className="search">
