@@ -134,9 +134,6 @@ this.isAuthenticated = this.props.isAuthenticated.bind(this);
         styles={styles}
       />
       <br/>
-      <div onClick={(e) => this.handleClick('archive')} className="float-button-backlog">A</div>
-      <div onClick={(e) => this.handleClick('backlog')} className="float-button-archive">B</div>
-      <div onClick={(e) => this.handleClick('current')} className="float-button-current">C</div>
       <KBoard selects={this.state.selects} cards={this.state.discards}
         />
         </div>
