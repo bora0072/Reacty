@@ -20,7 +20,9 @@ class Board extends React.Component {
   }
 
   componentDidMount() {
-
+    if(this.props.profile == null){
+      window.location.reload();
+    }
     if(this.isAuthenticated() && !!this.props.profile){
       var userHeader = new Headers();
       userHeader.append("username", this.props.profile.name);
