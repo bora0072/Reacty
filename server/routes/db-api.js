@@ -147,6 +147,50 @@ router.put('/cards/:cardId/tasks/:taskId', function(req, res, next){
           });
   });
 });
+//Send a card for Editing
+router.get('/cards/:card_id/find', function(req, res, next){
+  
+req.db.collection('TaskCollection').find({"name": req.headers['username'],"cards.id":parseInt(req.params.card_id)}).toArray(function (err, results) { 
+
+      //res.send(results[0].cards); 
+      //var card = getObjects(results, 'id', parseInt(req.params.card_id))[0]; 
+     //res.send(card);  
+     // console.log('Updating the content'+results); 
+     for(var i=0; i<results[0].cards.length; i++){ 
+         if(results[0].cards[i].id == parseInt(req.params.card_id)){ 
+           res.send(results[0].cards[i]); 
+         } 
+     }
+
+});
+});
+
+//Editing a Card 
+router.put('/editCard/:card_id', function(req, res, next){ 
+  //res.send('hi'); 
+  req.db.collection('TaskCollection').find({"name": req.headers['username']},{'cards':1}).toArray(function (err, results) { 
+        //res.send(getObjects(results, 'notebookname', 'notebook1')[0].notes); 
+        //res.send(results); 
+         //var card = getObjects(results, 'id', parseInt(req.params.card_id))[0]; 
+        //res.send(card);  
+        console.log('Updating the content'+results); 
+        for(var i=0; i<results[0].cards.length; i++){ 
+            if(results[0].cards[i].id == parseInt(req.params.card_id)){ 
+              results[0].cards[i] = req.body.card; 
+            } 
+        } 
+      
+        //res.send(results);
+       // Now again make a call to the db and push back all the cards to the particular user 
+        req.db.collection('TaskCollection').updateOne({ "name": req.headers['username']}, 
+            { 
+             "$set": 
+                {"cards": results[0].cards} 
+            }, function (err, documents) { 
+              res.send({ error: err, affected: documents }); 
+          }); 
+  }); 
+}); 
 
 //changing the status of cards
 router.put('/cards/:cardId', function(req, res, next){
@@ -196,6 +240,8 @@ function findAndRemove(array, property, value) {
 //      }
 //   );
 // }
+
+//We dropped using automatic getNextSequence but  use Date instead :retaining this code though!!! 
 
 // function getNextSequence(req,cardId) {
 //

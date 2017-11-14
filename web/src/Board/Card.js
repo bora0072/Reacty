@@ -6,6 +6,7 @@ import constants from './constants';
 import marked from 'marked';
 import PropTypes from 'prop-types';
 import 'font-awesome/css/font-awesome.css';
+import {Link} from 'react-router-dom';
 
 let titlePropType = (props, propName, componentName) => {
   if (props[propName]) {
@@ -101,6 +102,7 @@ class Card extends Component {
     return connectDropTarget(connectDragSource(
       <div className="card">
         <div style={sideColor}/>
+          <div className="card__edit" ><Link to={`/edit/${this.props.id}`}>&#9998;</Link></div>
           <div className={this.state.showDetails ? "card__title card__title--is-open" : "card__title"}
           onClick={this.toggleDetails.bind(this)}>{this.props.title}</div>
           {iconDetails}

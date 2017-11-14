@@ -8,6 +8,7 @@ import Board from './Board';
 import NewCard from './Board/NewCard';
 import Search from './Search';
 import ProfilePage from './ProfilePage';
+import EditCard from './Board/EditCard';
 
 class App extends Component {
 
@@ -27,6 +28,7 @@ class App extends Component {
             <Route exact path="/search" render={props => <Search {...props} {...this.props} />}/>
             <Route path="/profile" render={props => <ProfilePage {...props} {...this.props} />} />
             <Route exact path="/new"  render={props => <NewCard {...props} {...this.props} />} />
+            <Route exact path="/edit/:card_id" render={props => <EditCard {...props} {...this.props} />} />
           </div>
         </section>
       </div>

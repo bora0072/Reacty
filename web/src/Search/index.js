@@ -32,24 +32,20 @@ this.isAuthenticated = this.props.isAuthenticated.bind(this);
       var userHeader = new Headers();
       userHeader.append("username", this.props.profile.name);
 
-      fetch('/api/db/createuserIfAbsent',{headers: userHeader})
+      fetch(`/api/db/createuserIfAbsent`,{headers: userHeader})
       .then(res => res.json())
       .then(data => console.log(data))
       .catch(function (error) {
           console.log(error);
         });
 
-      fetch('/api/db/cards',{headers: userHeader})
+      fetch(`/api/db/cards`,{headers: userHeader})
       .then(res => res.json())
       .then(json => {this.setState({cards: json});})
       .catch(function (error) {
           console.log(error);
         });
-
-
       }
-
-
   }
 
   handleClear() {

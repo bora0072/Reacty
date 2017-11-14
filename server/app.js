@@ -20,6 +20,7 @@ app.use(cookieParser());
 app.use(expressMongoDb(process.env.DB_URI));
 
 app.use('/api/db', dbApi);
+app.use('/edit/api/db',dbApi); 
 // react routing (production)
 var reactBase = path.resolve(__dirname, '../web/build')
 if (!fs.existsSync(reactBase)) {

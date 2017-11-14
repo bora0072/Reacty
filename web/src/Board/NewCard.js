@@ -28,7 +28,7 @@ class NewCard extends Component{
       var userHeader = new Headers();
       userHeader.append("username", this.props.profile.name);
 
-      fetch('/api/db/createuserIfAbsent',{headers: userHeader})
+      fetch(`/api/db/createuserIfAbsent`,{headers: userHeader})
       .then(res => res.json())
       .then(data => (console.log(data)))
       .catch(function (error) {
