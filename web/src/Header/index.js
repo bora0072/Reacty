@@ -11,21 +11,11 @@ class Header extends Component {
         <div className="navbar-brand">
           <a class="navbar-item title" href="/">Reacty  </a>
         </div>
-
         <div className="navbar-item ">
           <a class="navbar-item" href="/search">
           KanbanBoard Search
           </a>
         </div>
-
-        <div className="navbar-item">
-          <a class="navbar-item" href="/demo">
-          Demo
-          </a>
-        </div>
-
-
-
         <div className="navbar-menu">
           <LoginLogout {...this.props} />
         </div>

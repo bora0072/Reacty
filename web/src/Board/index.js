@@ -20,7 +20,9 @@ class Board extends React.Component {
   }
 
   componentDidMount() {
-
+    if(this.isAuthenticated() && this.props.profile==null){
+      window.location.reload();
+    }
     if(this.isAuthenticated() && !!this.props.profile){
       var userHeader = new Headers();
       userHeader.append("username", this.props.profile.name);
@@ -237,9 +239,9 @@ class Board extends React.Component {
         landingPage = (
           <div>
           <Link to='/new' className="float-button">+</Link>
-          <div onClick={(e) => this.handleClick('archive')} className="float-button-backlog">A</div>
-          <div onClick={(e) => this.handleClick('backlog')} className="float-button-archive">B</div>
-          <div onClick={(e) => this.handleClick('current')} className="float-button-current">C</div>
+          <div onClick={(e) => this.handleClick('archive')} className="float-button-backlog">Archive</div>
+          <div onClick={(e) => this.handleClick('backlog')} className="float-button-archive">Backlog</div>
+          <div onClick={(e) => this.handleClick('current')} className="float-button-current">Current</div>
           <KanbanBoard display={this.state.display} cards={this.state.cards}
             taskCallbacks={{
               toggle: this.toggleTask.bind(this),
