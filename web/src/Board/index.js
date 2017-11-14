@@ -4,7 +4,7 @@ import './index.css';
 import {throttle} from './util';
 import {Link} from 'react-router-dom';
 import KanbanBoard from './kanbanBoard';
-import NotLogin from '../NotLogin';
+
 import 'whatwg-fetch';
 
 class Board extends React.Component {
@@ -234,7 +234,7 @@ class Board extends React.Component {
   }
   render(){
 
-      let landingPage = <div><NotLogin/></div>;
+      var landingPage;
       if (this.isAuthenticated() && !!this.props.profile) {
         landingPage = (
           <div>

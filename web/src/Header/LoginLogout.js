@@ -19,9 +19,15 @@ class LoginLogout extends Component {
 
     const userDisplay = this.isLoggedIn()
       ? (
-        <div className="navbar-item">
-          <span> <Link to="/profile">{this.props.profile.name}</Link> </span>
-        </div>
+        
+          <span className="navbar-item"> 
+          <figure class="image is-32x32">
+            <img src={this.props.profile.picture} alt="Image"/>
+          </figure>
+          &nbsp;  &nbsp;
+          <Link className=" has-text-success" to="/profile">{this.props.profile.name}</Link> 
+          </span>
+      
       ) : null;
 
     const loginLogoutButton = this.isLoggedIn()
