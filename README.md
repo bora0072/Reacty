@@ -5,8 +5,8 @@ CSCI 5117, Fall 2017, [assignment description](https://docs.google.com/document/
 
 ## App Info:
 
-* Team Name: TODO
-* App Name: TODO
+* Team Name: WonderDevils
+* App Name: Reacty
 * App Link: <https://ancient-garden-89428.herokuapp.com/>
 
 ### Students
@@ -33,7 +33,14 @@ CSCI 5117, Fall 2017, [assignment description](https://docs.google.com/document/
 **[Add a screenshot of each key page (maximum 4)](https://stackoverflow.com/questions/10189356/how-to-add-screenshot-to-readmes-in-github-repository)
 along with a very brief caption:**
 
-![](https://media.giphy.com/media/Adqe9XUP3x9LO/giphy.gif)
+Show archive notes.
+![](https://github.com/umn-5117-f17/module-3-group-assignment-wonderdevils/blob/master/web/public/archive.png)
+
+Present current notes.
+![](https://github.com/umn-5117-f17/module-3-group-assignment-wonderdevils/blob/master/web/public/current.png)
+
+Present current notes.
+![](https://github.com/umn-5117-f17/module-3-group-assignment-wonderdevils/blob/master/web/public/search.png)
 
 
 ## External Dependencies
@@ -41,8 +48,11 @@ along with a very brief caption:**
 **Document integrations with 3rd Party code or services here.
 Please do not document required libraries (e.g., Express, Bulma).**
 
-* Library or service name: description of use
-* ...
+* react-dnd: create drag and drop effect
+* immutability-helper: update this.state
+* react-autobind: autobind variables
+* lodash: change styles
+
 
 **If there's anything else you would like to disclose about how your project
 relied on external code, expertise, or anything else, please disclose that
