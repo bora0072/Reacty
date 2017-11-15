@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './index.css';
 
 class ProfilePage extends Component {
 
@@ -10,14 +11,30 @@ class ProfilePage extends Component {
   // }
 
   render() {
-
     let profileInfo = <div>not logged in</div>;
     if (this.props.profile) {
       profileInfo = (
         <div>
-          <h2>{this.props.profile.name}</h2>
-          <img src={this.props.profile.picture} alt="profile" />
-          <pre>{JSON.stringify(this.props.profile, null, 2)}</pre>
+
+          <div className="box">
+            <article className="media">
+              <div className="media-left">
+                <figure className="image is-32x6">
+                  <img src={this.props.profile.picture} alt="profile" />
+                </figure>
+              </div>
+              <div className="media-content">
+                <div className="content2">
+                  <p>
+                    <li>Log-in email: {this.props.profile.name}</li>
+                    <li>Nickname: {this.props.profile.nickname}</li>
+                    <li>Last update time: {this.props.profile.updated_at.replace(/[a-zA-Z]/g," ")}</li>
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+
         </div>
       );
     }
