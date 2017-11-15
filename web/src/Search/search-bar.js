@@ -77,11 +77,7 @@ class SearchBar extends React.Component {
     });
   }
 
-  handleClick(event) {
-    if (!this.container.contains(event.target)) {
-      this.props.onClear();
-    }
-  }
+
 
   handleDebouncedChange(searchTerm) {
     this.setState({
@@ -181,6 +177,7 @@ class SearchBar extends React.Component {
     const renderSuggestions = state.value && props.suggestions.length > 0;
 
     return (
+      <div class="columns">
       <div
         className={styles.wrapper}
         ref={ref => this.container = ref}
@@ -192,9 +189,11 @@ class SearchBar extends React.Component {
             [styles.hasSuggestions]: props.suggestions.length > 0
           })}
         >
+        <div class="field has-addons">
+        <div class="control is-expanded">
           <input
             {...attributes}
-            className={styles.input}
+            class="input"
             type="text"
             ref={ref => this.input = ref}
             value={state.value}
@@ -203,18 +202,17 @@ class SearchBar extends React.Component {
             onBlur={this.toggleFocus}
             onKeyDown={props.suggestions && this.handleKeyDown}
           />
-          {renderClearButton && (
-            <button
-              className={styles.clearButton}
-              onClick={this.clearSearch}
-            />
-          )}
+
+          <strong>{renderClearButton }</strong></div>
+          <div class="control">
           {renderSearchButton && (
-            <button
-              className={styles.submitButton}
+            <button class="button"
+
               onClick={this.handleSearch}
-            />
+            >Search</button>
           )}
+          </div>
+          </div>
         </div>
         {renderSuggestions && (
           <Suggestions
@@ -228,6 +226,7 @@ class SearchBar extends React.Component {
           />
         )}
       </div>
+</div>
     );
   }
 }
@@ -260,15 +259,15 @@ SearchBar.defaultProps = {
   renderClearButton: false,
   renderSearchButton: false,
   styles: {
-    wrapper: 'react-search-bar__wrapper',
-    field: 'react-search-bar__field',
-    focusedField: 'react-search-bar__field--focused',
-    hasSuggestions: 'react-search-bar__field--has-suggestions',
-    input: 'react-search-bar__input',
-    clearButton: 'react-search-bar__clear',
-    submitButton: 'react-search-bar__submit',
-    suggestions: 'react-search-bar__suggestions',
-    suggestion: 'react-search-bar__suggestion'
+    wrapper: 'module-3-group-assignment-wonderdevils__wrapper',
+    field: 'module-3-group-assignment-wonderdevils__field',
+    focusedField: 'module-3-group-assignment-wonderdevils__field--focused',
+    hasSuggestions: 'module-3-group-assignment-wonderdevils__field--has-suggestions',
+    input: 'module-3-group-assignment-wonderdevils__input',
+    clearButton: 'module-3-group-assignment-wonderdevils__clear',
+    submitButton: 'module-3-group-assignment-wonderdevils__submit',
+    suggestions: 'module-3-group-assignment-wonderdevils__suggestions',
+    suggestion: 'module-3-group-assignment-wonderdevils__suggestion'
   },
   suggestionRenderer: suggestion => <div>{suggestion}</div>
 };

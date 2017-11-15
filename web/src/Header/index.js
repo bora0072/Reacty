@@ -16,9 +16,9 @@ class Header extends Component {
           <a class="navbar-item title has-text-success" href="/">Reacty  </a>
         </div>
         <div className="navbar-item ">
-          {/*}<a class="navbar-item" href="/search">
+          <a class="navbar-item" href="/search">
           KanbanBoard Search
-          </a>*/}
+          </a>
         </div>
         <div className="navbar-menu">
           <LoginLogout {...this.props} />

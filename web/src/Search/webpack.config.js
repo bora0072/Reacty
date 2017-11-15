@@ -2,7 +2,7 @@ const path = require('path');
 const publicPath = path.resolve(__dirname, 'public');
 
 module.exports = {
-  entry: path.resolve(__dirname, 'demo.js'),
+  entry: path.resolve(__dirname, 'index.js'),
   output: {
     path: publicPath,
     filename: 'bundle.js'

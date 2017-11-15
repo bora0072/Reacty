@@ -99,7 +99,7 @@ this.isAuthenticated = this.props.isAuthenticated.bind(this);
   suggestionRenderer(suggestion, searchTerm) {
     return (
       <span>
-        <span>{searchTerm}</span>
+        <span><font color="white">{searchTerm}</font></span>
         <strong>{suggestion.substr(searchTerm.length)}</strong>
       </span>
     );
