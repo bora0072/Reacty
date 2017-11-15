@@ -7,12 +7,14 @@ CSCI 5117, Fall 2017, [assignment description](https://docs.google.com/document/
 
 * Team Name: TODO
 * App Name: TODO
-* App Link: <https://TODO.herokuapp.com/>
+* App Link: <https://ancient-garden-89428.herokuapp.com/>
 
 ### Students
 
-* First Last, x500@umn.edu
-* ...
+* Rahul Bora, bora0072@umn.edu
+* Kiran Ravindra ,ravin047@umn.edu
+* Nidhi Patel, patel643@umn.edu
+* Yinqiao Zheng, zheng928@umn.edu
 
 
 ## Key Features
@@ -20,7 +22,10 @@ CSCI 5117, Fall 2017, [assignment description](https://docs.google.com/document/
 **Describe the most challenging features you implemented
 (one sentence per bullet, maximum 4 bullets):**
 
-* ...
+* Keyword extraction
+* Search auto-completition
+* Drag and drop
+* Authentication
 
 
 ## Screenshots of Site
