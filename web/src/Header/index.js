@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-
 import LoginLogout from './LoginLogout';
 import './index.css';
-import NotLogin from '../NotLogin';
 
 class Header extends Component {
   constructor(props){
@@ -11,14 +9,9 @@ class Header extends Component {
   }
 
   render() {
-    
-    var notLoggedin;
-    if (!(this.isAuthenticated() && !!this.props.profile)){
-        notLoggedin = (<div ><NotLogin/></div>);
-    }
     return (
       <div>
-      <nav className="navbar is-dark" aria-label="main navigation">
+      <nav className="navbar is-link" aria-label="main navigation">
         <div className="navbar-brand">
           <a class="navbar-item title has-text-success" href="/">Reacty  </a>
         </div>
@@ -31,9 +24,6 @@ class Header extends Component {
           <LoginLogout {...this.props} />
         </div>
     </nav>
-    <div>
-     {notLoggedin}
-    </div>
     </div>
     )
   }
