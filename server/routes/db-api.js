@@ -61,10 +61,10 @@ router.get('/createuserIfAbsent',function(req,res,next){
         console.log("User not in db ... creating user" + results);
         req.db.collection('TaskCollection').insert(results,function(err,documents){
           console.log('User ' + req.headers['username'] + 'created successfuly');
-          res.send("User Created");
+        //  res.send("User Created");
         });
       }else{
-          res.send("User Already Present");
+        //  res.send("User Already Present");
       }
     });
 });
