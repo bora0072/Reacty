@@ -1,6 +1,6 @@
 # heroku local config
 .env
-
+misc
 # Logs
 logs
 *.log
