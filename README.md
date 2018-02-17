@@ -1,7 +1,8 @@
 
-# Module 3 Group Assignment: Note-a-matic
+# Reacty
 
-CSCI 5117, Fall 2017, [assignment description](https://docs.google.com/document/d/13q79EywC9TzWts9K-10b_tKA-ZVyv9_avWGJpgprA6A)
+Done as part of CSCI 5117, Fall 2017
+[assignment description](https://docs.google.com/document/d/13q79EywC9TzWts9K-10b_tKA-ZVyv9_avWGJpgprA6A)
 
 ## App Info:
 
@@ -19,9 +20,6 @@ CSCI 5117, Fall 2017, [assignment description](https://docs.google.com/document/
 
 ## Key Features
 
-**Describe the most challenging features you implemented
-(one sentence per bullet, maximum 4 bullets):**
-
 * Keyword extraction
 * Search auto-completition
 * Drag and drop
@@ -29,9 +27,6 @@ CSCI 5117, Fall 2017, [assignment description](https://docs.google.com/document/
 
 
 ## Screenshots of Site
-
-**[Add a screenshot of each key page (maximum 4)](https://stackoverflow.com/questions/10189356/how-to-add-screenshot-to-readmes-in-github-repository)
-along with a very brief caption:**
 
 Show archive notes.
 ![](https://github.com/umn-5117-f17/module-3-group-assignment-wonderdevils/blob/master/web/public/archive.png)
@@ -45,18 +40,10 @@ Present current notes.
 
 ## External Dependencies
 
-**Document integrations with 3rd Party code or services here.
-Please do not document required libraries (e.g., Express, Bulma).**
-
 * react-dnd: create drag and drop effect
 * immutability-helper: update this.state
 * react-autobind: autobind variables
 * lodash: change styles
-
-
-**If there's anything else you would like to disclose about how your project
-relied on external code, expertise, or anything else, please disclose that
-here:**
 
 ...
 =======
@@ -68,9 +55,6 @@ Features:
 * based on <https://github.com/facebookincubator/create-react-app>
 * includes bulma css
 * includes <https://github.com/ReactTraining/react-router>
-
-Example code:
-
 * mongodb
 
 ## setup and run in development
